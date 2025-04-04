@@ -19,28 +19,42 @@ const ToggleClicks = () => {
           style={styles.clickIcon}
         ></Image>
       </TouchableOpacity>
+      <TouchableOpacity onPress={handleClickPress} style={styles.toggleButton}>
+        <Image
+          source={clickPress ? ClickSpent : ClickDefault}
+          style={styles.clickIcon}
+        ></Image>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleClickPress} style={styles.toggleButton}>
+        <Image
+          source={clickPress ? ClickSpent : ClickDefault}
+          style={styles.clickIcon}
+        ></Image>
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   componentContainer: {
-    width: '100%',
-    height: 'auto',
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: 100,
+    paddingVertical: 10,
+    marginVertical: 10,
     borderColor: 'white',
     borderWidth: 1,
   },
   toggleButton: {
-    flex: 1,
-    alignItems: 'center',
+    marginHorizontal: 10,
+    borderColor: '#FFFFFF',
+    borderWidth: 1,
   },
   clickIcon: {
     width: 100,
-    height: 100,
-    justifyContent: 'center',
   },
 });
 

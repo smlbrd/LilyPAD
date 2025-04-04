@@ -1,13 +1,16 @@
 import CreditsCounter from '@/components/CreditsCounter';
+import ToggleClicks from '@/components/ToggleClicks';
 import { StyleSheet, View } from 'react-native';
 
 export default function Index() {
   return (
     <View style={styles.homeContainer}>
       <View style={[styles.playerContainer, styles.farContainer]}>
+        <ToggleClicks />
         <CreditsCounter />
       </View>
       <View style={styles.playerContainer}>
+        <ToggleClicks />
         <CreditsCounter />
       </View>
     </View>
@@ -23,7 +26,7 @@ const styles = StyleSheet.create({
   },
   playerContainer: {
     flex: 1,
-    flexDirection: 'column',
+    width: '100%',
   },
   farContainer: {
     transform: [{ rotate: '180deg' }],

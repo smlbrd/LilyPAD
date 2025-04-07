@@ -21,12 +21,10 @@ const styles = StyleSheet.create({
   homeContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#000000',
   },
   playerContainer: {
     flex: 1,
-    width: '100%',
   },
   farContainer: {
     transform: [{ rotate: '180deg' }],

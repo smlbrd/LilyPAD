@@ -24,20 +24,11 @@ const CreditsCounter = () => {
 
   return (
     <View style={styles.counterContainer}>
+      <Text style={styles.creditsText}>{credits}</Text>
       <Image
         source={require('../assets/images/NSG_CREDIT_HALFTRANSPARENT.png')}
         style={styles.creditsIcon}
       />
-      <Text style={styles.creditsText}>{credits}</Text>
-      <TouchableHighlight
-        onPress={handleIncrementPress}
-        style={styles.incrementButton}
-        underlayColor="rgba(255, 255, 255, 0.2)"
-      >
-        <View style={[styles.touchableArea, styles.plusIcon]}>
-          <Text style={styles.creditsText}>+</Text>
-        </View>
-      </TouchableHighlight>
       <TouchableHighlight
         onPress={handleDecrementPress}
         style={styles.decrementButton}
@@ -47,29 +38,37 @@ const CreditsCounter = () => {
           <Text style={styles.creditsText}>-</Text>
         </View>
       </TouchableHighlight>
+      <TouchableHighlight
+        onPress={handleIncrementPress}
+        style={styles.incrementButton}
+        underlayColor="rgba(255, 255, 255, 0.2)"
+      >
+        <View style={[styles.touchableArea, styles.plusIcon]}>
+          <Text style={styles.creditsText}>+</Text>
+        </View>
+      </TouchableHighlight>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   counterContainer: {
-    position: 'relative',
-    width: '100%',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   touchableArea: {
     flex: 1,
+    zIndex: 1,
   },
-  incrementButton: {
+  decrementButton: {
     position: 'absolute',
     left: 0,
     top: 0,
     bottom: 0,
     width: '50%',
   },
-  decrementButton: {
+  incrementButton: {
     position: 'absolute',
     right: 0,
     top: 0,
@@ -79,23 +78,31 @@ const styles = StyleSheet.create({
   plusIcon: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: '80%',
+    alignItems: 'flex-end',
+    paddingRight: 10,
   },
   minusIcon: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: '80%',
+    alignItems: 'flex-start',
+    paddingLeft: 10,
   },
-  creditsIcon: { position: 'absolute', width: 100, height: 100 },
-  creditsText: {
+  creditsIcon: {
     position: 'absolute',
-    fontSize: 48,
+    width: 70,
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 0,
+  },
+  creditsText: {
+    fontSize: 50,
     fontWeight: 'bold',
+    textAlign: 'center',
     textShadowColor: '#000000',
     textShadowRadius: 5,
     color: '#FFFFFF',
+    zIndex: 0,
   },
 });
 

@@ -6,12 +6,12 @@ export default function Index() {
   return (
     <View style={styles.homeContainer}>
       <View style={[styles.playerContainer, styles.farContainer]}>
-        <ToggleClicks />
-        <CreditsCounter />
+        <ToggleClicks userRole={'runner'} />
+        <CreditsCounter playerID="player2" />
       </View>
       <View style={styles.playerContainer}>
-        <ToggleClicks />
-        <CreditsCounter />
+        <ToggleClicks userRole={'corp'} />
+        <CreditsCounter playerID="player1" />
       </View>
     </View>
   );

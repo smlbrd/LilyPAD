@@ -13,7 +13,7 @@ interface CreditsCounterProps {
 }
 
 const CreditsCounter = ({ playerID }: CreditsCounterProps) => {
-  const [credits, setCredits] = useState(0);
+  const [credits, setCredits] = useState(5);
 
   const STORAGE_KEY = `credits_value_${playerID}`;
 

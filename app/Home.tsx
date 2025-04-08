@@ -7,11 +7,11 @@ export default function Index() {
     <View style={styles.homeContainer}>
       <View style={[styles.playerContainer, styles.farContainer]}>
         <ToggleClicks userRole={'runner'} />
-        <CreditsCounter />
+        <CreditsCounter playerID="player2" />
       </View>
       <View style={styles.playerContainer}>
         <ToggleClicks userRole={'corp'} />
-        <CreditsCounter />
+        <CreditsCounter playerID="player1" />
       </View>
     </View>
   );

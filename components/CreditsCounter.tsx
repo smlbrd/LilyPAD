@@ -1,5 +1,4 @@
-import * as Haptics from 'expo-haptics';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   View,
   TouchableHighlight,
@@ -7,18 +6,49 @@ import {
   Text,
   Image,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const CreditsCounter = () => {
+interface CreditsCounterProps {
+  playerID: string;
+}
+
+const CreditsCounter = ({ playerID }: CreditsCounterProps) => {
   const [credits, setCredits] = useState(0);
 
+  const STORAGE_KEY = `credits_value_${playerID}`;
+
+  useEffect(() => {
+    const loadCredits = async () => {
+      try {
+        const storedCredits = await AsyncStorage.getItem(STORAGE_KEY);
+        if (storedCredits !== null) {
+          setCredits(parseInt(storedCredits, 10));
+        }
+      } catch (error) {
+        console.error(`Failed to load credits for player ${playerID}:`, error);
+      }
+    };
+
+    loadCredits();
+  }, [STORAGE_KEY]);
+
+  useEffect(() => {
+    const saveCredits = async () => {
+      try {
+        await AsyncStorage.setItem(STORAGE_KEY, credits.toString());
+      } catch (error) {
+        console.error(`Failed to save credits for player ${playerID}:`, error);
+      }
+    };
+
+    saveCredits();
+  }, [credits, STORAGE_KEY]);
+
   const handleDecrementPress = () => {
-    // TODO: Make haptics conditional, based on device platform
-    // Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     setCredits((previousCredits) => previousCredits - 1);
   };
 
   const handleIncrementPress = () => {
-    // Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     setCredits((previousCredits) => previousCredits + 1);
   };
 

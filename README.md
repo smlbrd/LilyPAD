@@ -1,6 +1,6 @@
 # LilyPAD
 
-LilyPAD is a tabletop companion for Netrunner, a two-player asymmetric card game.
+LilyPAD is a tabletop companion for [Netrunner](https://nullsignal.games/about/netrunner/), a two-player asymmetric card game. 
 
 ## Get started
 

@@ -2,7 +2,7 @@ import CreditsCounter from '@/components/CreditsCounter';
 import ResetModal from '@/components/ResetModal';
 import ToggleClicks from '@/components/ToggleClicks';
 import { useState } from 'react';
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 export default function Index() {
   const [resetState, setResetState] = useState(false);

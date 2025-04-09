@@ -11,22 +11,41 @@ interface ToggleClicksProps {
 }
 
 const ToggleClicks = ({ userRole, reset }: ToggleClicksProps) => {
-  const clicksCount = userRole === 'runner' ? 4 : 3;
+  const DEFAULT_CLICKS = { runner: 4, corp: 3 };
+
+  const clicksCount = DEFAULT_CLICKS[userRole];
 
   const [createClicks, setCreateClicks] = useState<boolean[]>(
     Array(clicksCount).fill(false)
   );
 
   useEffect(() => {
+    const resetClicks = async () => {
+      const defaultClicks = Array(clicksCount).fill(false);
+      setCreateClicks(defaultClicks);
+
+      try {
+        await AsyncStorage.setItem(
+          `clicks_${userRole}`,
+          JSON.stringify(defaultClicks)
+        );
+      } catch (error) {
+        console.error(`Failed to reset clicks for ${userRole}:`, error);
+      }
+    };
+
+    resetClicks();
+  }, [reset, userRole]);
+
+  useEffect(() => {
     const loadClicks = async () => {
       try {
         const savedClicks = await AsyncStorage.getItem(`clicks_${userRole}`);
-
         if (savedClicks) {
           setCreateClicks(JSON.parse(savedClicks));
         }
       } catch (error) {
-        console.error('Failed to load clicks:', error);
+        console.error(`Failed to load clicks for ${userRole}:`, error);
       }
     };
 
@@ -41,17 +60,17 @@ const ToggleClicks = ({ userRole, reset }: ToggleClicksProps) => {
           JSON.stringify(createClicks)
         );
       } catch (error) {
-        console.error('Failed to save clicks:', error);
+        console.error(`Failed to save clicks for ${userRole}:`, error);
       }
     };
 
     saveClicks();
   }, [createClicks, userRole]);
 
-  const handleClickPress = async (index: number) => {
-    const newToggledStates = [...createClicks];
-    newToggledStates[index] = !newToggledStates[index];
-    setCreateClicks(newToggledStates);
+  const handleClickPress = (index: number) => {
+    const updatedClicks = [...createClicks];
+    updatedClicks[index] = !updatedClicks[index];
+    setCreateClicks(updatedClicks);
   };
 
   return (

@@ -1,7 +1,8 @@
 import CreditsCounter from '@/components/CreditsCounter';
+import ResetModal from '@/components/ResetModal';
 import ToggleClicks from '@/components/ToggleClicks';
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function Index() {
   const [resetState, setResetState] = useState(false);
@@ -16,9 +17,9 @@ export default function Index() {
         <ToggleClicks userRole={'runner'} reset={resetState} />
         <CreditsCounter playerID="player2" reset={resetState} />
       </View>
-      <TouchableOpacity style={styles.resetButton} onPress={handleReset}>
-        <Text style={styles.resetButtonText}>Reset</Text>
-      </TouchableOpacity>
+
+      <ResetModal onReset={handleReset} />
+
       <View style={styles.playerContainer}>
         <ToggleClicks userRole={'corp'} reset={resetState} />
         <CreditsCounter playerID="player1" reset={resetState} />
@@ -38,17 +39,5 @@ const styles = StyleSheet.create({
   },
   farContainer: {
     transform: [{ rotate: '180deg' }],
-  },
-  resetButton: {
-    backgroundColor: '#FF0000',
-    padding: 10,
-    margin: 20,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  resetButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
   },
 });

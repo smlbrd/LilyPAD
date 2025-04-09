@@ -1,3 +1,4 @@
+import AgendaScore from '@/components/AgendaCounter';
 import CreditsCounter from '@/components/CreditsCounter';
 import ResetModal from '@/components/ResetModal';
 import ToggleClicks from '@/components/ToggleClicks';
@@ -14,6 +15,7 @@ export default function Index() {
   return (
     <View style={styles.homeContainer}>
       <View style={[styles.playerContainer, styles.farContainer]}>
+        <AgendaScore reset={resetState} />
         <ToggleClicks userRole={'runner'} reset={resetState} />
         <CreditsCounter playerID="player2" reset={resetState} />
       </View>
@@ -23,6 +25,7 @@ export default function Index() {
       </View>
 
       <View style={styles.playerContainer}>
+        <AgendaScore reset={resetState} />
         <ToggleClicks userRole={'corp'} reset={resetState} />
         <CreditsCounter playerID="player1" reset={resetState} />
       </View>

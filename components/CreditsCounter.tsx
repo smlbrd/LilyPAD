@@ -10,9 +10,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface CreditsCounterProps {
   playerID: string;
+  reset: boolean;
 }
 
-const CreditsCounter = ({ playerID }: CreditsCounterProps) => {
+const CreditsCounter = ({ playerID, reset }: CreditsCounterProps) => {
   const [credits, setCredits] = useState(5);
 
   const STORAGE_KEY = `credits_value_${playerID}`;
@@ -43,6 +44,18 @@ const CreditsCounter = ({ playerID }: CreditsCounterProps) => {
 
     saveCredits();
   }, [credits, STORAGE_KEY]);
+
+  useEffect(() => {
+    setCredits(5);
+    const clearCredits = async () => {
+      try {
+        await AsyncStorage.setItem(STORAGE_KEY, '5');
+      } catch (error) {
+        console.error(`Failed to reset credits for player ${playerID}:`, error);
+      }
+    };
+    clearCredits();
+  }, [reset]);
 
   const handleDecrementPress = () => {
     setCredits((previousCredits) => previousCredits - 1);

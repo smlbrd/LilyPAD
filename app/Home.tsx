@@ -1,17 +1,30 @@
 import CreditsCounter from '@/components/CreditsCounter';
+import ResetModal from '@/components/ResetModal';
 import ToggleClicks from '@/components/ToggleClicks';
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 export default function Index() {
+  const [resetState, setResetState] = useState(false);
+
+  const handleReset = () => {
+    setResetState((prev) => !prev);
+  };
+
   return (
     <View style={styles.homeContainer}>
       <View style={[styles.playerContainer, styles.farContainer]}>
-        <ToggleClicks userRole={'runner'} />
-        <CreditsCounter playerID="player2" />
+        <ToggleClicks userRole={'runner'} reset={resetState} />
+        <CreditsCounter playerID="player2" reset={resetState} />
       </View>
+
+      <View style={styles.dividerContainer}>
+        <ResetModal onReset={handleReset} />
+      </View>
+
       <View style={styles.playerContainer}>
-        <ToggleClicks userRole={'corp'} />
-        <CreditsCounter playerID="player1" />
+        <ToggleClicks userRole={'corp'} reset={resetState} />
+        <CreditsCounter playerID="player1" reset={resetState} />
       </View>
     </View>
   );
@@ -25,6 +38,11 @@ const styles = StyleSheet.create({
   },
   playerContainer: {
     flex: 1,
+  },
+  dividerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   farContainer: {
     transform: [{ rotate: '180deg' }],

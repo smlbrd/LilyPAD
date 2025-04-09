@@ -18,7 +18,9 @@ export default function Index() {
         <CreditsCounter playerID="player2" reset={resetState} />
       </View>
 
-      <ResetModal onReset={handleReset} />
+      <View style={styles.dividerContainer}>
+        <ResetModal onReset={handleReset} />
+      </View>
 
       <View style={styles.playerContainer}>
         <ToggleClicks userRole={'corp'} reset={resetState} />
@@ -36,6 +38,11 @@ const styles = StyleSheet.create({
   },
   playerContainer: {
     flex: 1,
+  },
+  dividerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   farContainer: {
     transform: [{ rotate: '180deg' }],

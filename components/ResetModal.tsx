@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+
+const ResetIcon = require('../assets/images/icons8-reset-50.png');
 
 interface ResetModalProps {
   onReset: () => void;
@@ -24,7 +33,7 @@ const ResetModal = ({ onReset }: ResetModalProps) => {
   return (
     <>
       <TouchableOpacity style={styles.resetButton} onPress={openModal}>
-        <Text style={styles.resetButtonText}>Reset</Text>
+        <Image source={ResetIcon} />
       </TouchableOpacity>
 
       <Modal
@@ -62,16 +71,11 @@ const ResetModal = ({ onReset }: ResetModalProps) => {
 
 const styles = StyleSheet.create({
   resetButton: {
-    backgroundColor: '#FF0000',
+    height: 80,
+    width: 80,
     padding: 20,
-    margin: 20,
-    borderRadius: 5,
+    justifyContent: 'center',
     alignItems: 'center',
-  },
-  resetButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
   },
   modalContainer: {
     flex: 1,

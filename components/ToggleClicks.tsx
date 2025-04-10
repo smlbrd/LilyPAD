@@ -173,10 +173,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   rowContainer: {
+    flex: 1,
     flexDirection: 'row',
   },
   toggleButton: {
     flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 10,
     borderColor: '#FFF',
@@ -199,16 +201,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-end',
-    paddingLeft: 10,
   },
   minusIcon: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-start',
-    paddingRight: 10,
   },
   adjustButton: {
-    width: 50,
+    width: 60,
+    justifyContent: 'center',
     paddingHorizontal: 10,
     borderColor: '#FFF',
     borderWidth: 1,

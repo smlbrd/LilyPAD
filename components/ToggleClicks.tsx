@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ClickDefault = require('../assets/images/NSG_CLICK_DEFAULT_OPAQUE.png');
@@ -13,28 +20,29 @@ interface ToggleClicksProps {
 const ToggleClicks = ({ userRole, reset }: ToggleClicksProps) => {
   const DEFAULT_CLICKS = { runner: 4, corp: 3 };
 
-  const clicksCount = DEFAULT_CLICKS[userRole];
-
+  const [clicksCount, setClicksCount] = useState(DEFAULT_CLICKS[userRole]);
   const [createClicks, setCreateClicks] = useState<boolean[]>(
-    Array(clicksCount).fill(false)
+    Array(DEFAULT_CLICKS[userRole]).fill(false)
   );
 
   useEffect(() => {
     const resetClicks = async () => {
-      const defaultClicks = Array(clicksCount).fill(false);
-      setCreateClicks(defaultClicks);
+      setClicksCount(DEFAULT_CLICKS[userRole]);
+      setCreateClicks(Array(DEFAULT_CLICKS[userRole]).fill(false));
 
       try {
         await AsyncStorage.setItem(
           `clicks_${userRole}`,
-          JSON.stringify(defaultClicks)
+          JSON.stringify(DEFAULT_CLICKS[userRole])
         );
       } catch (error) {
         console.error(`Failed to reset clicks for ${userRole}:`, error);
       }
     };
 
-    resetClicks();
+    if (reset) {
+      resetClicks();
+    }
   }, [reset, userRole]);
 
   useEffect(() => {
@@ -42,7 +50,9 @@ const ToggleClicks = ({ userRole, reset }: ToggleClicksProps) => {
       try {
         const savedClicks = await AsyncStorage.getItem(`clicks_${userRole}`);
         if (savedClicks) {
-          setCreateClicks(JSON.parse(savedClicks));
+          const parsedClicks = JSON.parse(savedClicks);
+          setClicksCount(parsedClicks.length);
+          setCreateClicks(parsedClicks);
         }
       } catch (error) {
         console.error(`Failed to load clicks for ${userRole}:`, error);
@@ -73,22 +83,63 @@ const ToggleClicks = ({ userRole, reset }: ToggleClicksProps) => {
     setCreateClicks(updatedClicks);
   };
 
+  const handleAddClick = () => {
+    setClicksCount((prev) => prev + 1);
+    setCreateClicks((prev) => [...prev, false]);
+  };
+
+  const handleRemoveClick = () => {
+    if (clicksCount > 3) {
+      setClicksCount((prev) => prev - 1);
+      setCreateClicks((prev) => prev.slice(0, -1));
+    }
+  };
+
   return (
     <View style={styles.componentContainer}>
+      <TouchableHighlight
+        onPress={handleRemoveClick}
+        style={styles.adjustButton}
+        underlayColor="rgba(255, 255, 255, 0.2)"
+      >
+        <View style={[styles.touchableArea, styles.minusIcon]}>
+          <Text style={styles.adjustButtonText}>-</Text>
+        </View>
+      </TouchableHighlight>
+
       <View style={styles.clickContainer}>
-        {Array.from({ length: clicksCount }, (_, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => handleClickPress(index)}
-            style={styles.toggleButton}
-          >
-            <Image
-              source={createClicks[index] ? ClickSpent : ClickDefault}
-              style={styles.clickIcon}
-            />
-          </TouchableOpacity>
-        ))}
+        {clicksCount <= 4 ? (
+          <View style={styles.rowContainer}>
+            {createClicks.map((clicked, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handleClickPress(index)}
+                style={styles.toggleButton}
+              >
+                <Image
+                  source={clicked ? ClickSpent : ClickDefault}
+                  style={styles.clickIcon}
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+        ) : (
+          <View style={styles.condensedContainer}>
+            <Image source={ClickDefault} style={styles.clickIcon} />
+            <Text style={styles.clickCountText}>{clicksCount}</Text>
+          </View>
+        )}
       </View>
+
+      <TouchableHighlight
+        onPress={handleAddClick}
+        style={styles.adjustButton}
+        underlayColor="rgba(255, 255, 255, 0.2)"
+      >
+        <View style={[styles.touchableArea, styles.plusIcon]}>
+          <Text style={styles.adjustButtonText}>+</Text>
+        </View>
+      </TouchableHighlight>
     </View>
   );
 };
@@ -96,20 +147,64 @@ const ToggleClicks = ({ userRole, reset }: ToggleClicksProps) => {
 const styles = StyleSheet.create({
   componentContainer: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 5,
+  },
+  touchableArea: {
+    flex: 1,
+    zIndex: 1,
   },
   clickContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  rowContainer: {
     flexDirection: 'row',
   },
   toggleButton: {
     flex: 1,
     alignItems: 'center',
+    paddingHorizontal: 10,
     marginHorizontal: 5,
   },
   clickIcon: {
-    width: 100,
+    width: 80,
+    height: 80,
+    paddingHorizontal: 10,
+  },
+  clickCountText: {
+    fontSize: 50,
+    fontWeight: 'bold',
+    color: '#FFF',
+  },
+  condensedContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  plusIcon: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  minusIcon: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  adjustButton: {
+    padding: 10,
+    paddingHorizontal: 10,
+  },
+  adjustButtonText: {
+    fontSize: 50,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textShadowColor: '#000000',
+    textShadowRadius: 5,
+    color: 'rgba(255, 255, 255, 0.5)',
+    zIndex: 0,
   },
 });
 

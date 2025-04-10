@@ -84,15 +84,27 @@ const ToggleClicks = ({ userRole, reset }: ToggleClicksProps) => {
   };
 
   const handleAddClick = () => {
+    if (
+      (clicksCount >= 4 && createClicks.some((clicked) => clicked)) ||
+      createClicks.some((clicked) => clicked)
+    ) {
+      return;
+    }
+
     setClicksCount((prev) => prev + 1);
     setCreateClicks((prev) => [...prev, false]);
   };
 
   const handleRemoveClick = () => {
-    if (clicksCount > 3) {
-      setClicksCount((prev) => prev - 1);
-      setCreateClicks((prev) => prev.slice(0, -1));
+    if (
+      clicksCount === 3 ||
+      (clicksCount >= 3 && createClicks.some((clicked) => clicked))
+    ) {
+      return;
     }
+
+    setClicksCount((prev) => prev - 1);
+    setCreateClicks((prev) => prev.slice(0, -1));
   };
 
   return (
@@ -167,12 +179,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingHorizontal: 10,
-    marginHorizontal: 5,
+    borderColor: '#FFF',
+    borderWidth: 1,
   },
   clickIcon: {
     width: 80,
     height: 80,
-    paddingHorizontal: 10,
   },
   clickCountText: {
     fontSize: 50,
@@ -187,15 +199,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-end',
+    paddingLeft: 10,
   },
   minusIcon: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-start',
+    paddingRight: 10,
   },
   adjustButton: {
-    padding: 10,
+    width: 50,
     paddingHorizontal: 10,
+    borderColor: '#FFF',
+    borderWidth: 1,
   },
   adjustButtonText: {
     fontSize: 50,

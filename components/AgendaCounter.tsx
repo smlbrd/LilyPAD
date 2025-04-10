@@ -48,7 +48,7 @@ const AgendaScore = ({ maxScore = 7, reset }: AgendaScoreProps) => {
         underlayColor="rgba(255, 255, 255, 0.2)"
       >
         <View style={[styles.touchableArea, styles.minusIcon]}>
-          <Text style={styles.scoreText}>-</Text>
+          <Text style={[styles.scoreText, styles.adjustButtonText]}>-</Text>
         </View>
       </TouchableHighlight>
 
@@ -58,7 +58,7 @@ const AgendaScore = ({ maxScore = 7, reset }: AgendaScoreProps) => {
         underlayColor="rgba(255, 255, 255, 0.2)"
       >
         <View style={[styles.touchableArea, styles.plusIcon]}>
-          <Text style={styles.scoreText}>+</Text>
+          <Text style={[styles.scoreText, styles.adjustButtonText]}>+</Text>
         </View>
       </TouchableHighlight>
     </View>
@@ -104,6 +104,10 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     width: '50%',
+  },
+  adjustButtonText: {
+    color: 'rgba(255, 255, 255, 0.5)',
+    zIndex: 0,
   },
   plusIcon: {
     flex: 1,

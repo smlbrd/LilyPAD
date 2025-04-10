@@ -67,18 +67,22 @@ const CreditsCounter = ({ playerID, reset }: CreditsCounterProps) => {
 
   return (
     <View style={styles.counterContainer}>
-      <Text style={styles.creditsText}>{credits}</Text>
-      <Image
-        source={require('../assets/images/NSG_CREDIT_HALFTRANSPARENT.png')}
-        style={styles.creditsIcon}
-      />
+      <View style={styles.infoContainer}>
+        <Image
+          source={require('../assets/images/NSG_CREDIT_OPAQUE.png')}
+          style={styles.creditsIcon}
+        />
+        <View style={styles.creditsTextContainer}>
+          <Text style={styles.creditsText}>{credits}</Text>
+        </View>
+      </View>
       <TouchableHighlight
         onPress={handleDecrementPress}
         style={styles.decrementButton}
         underlayColor="rgba(255, 255, 255, 0.2)"
       >
         <View style={[styles.touchableArea, styles.minusIcon]}>
-          <Text style={styles.creditsText}>-</Text>
+          <Text style={[styles.creditsText, styles.adjustButtonText]}>-</Text>
         </View>
       </TouchableHighlight>
       <TouchableHighlight
@@ -87,7 +91,7 @@ const CreditsCounter = ({ playerID, reset }: CreditsCounterProps) => {
         underlayColor="rgba(255, 255, 255, 0.2)"
       >
         <View style={[styles.touchableArea, styles.plusIcon]}>
-          <Text style={styles.creditsText}>+</Text>
+          <Text style={[styles.creditsText, styles.adjustButtonText]}>+</Text>
         </View>
       </TouchableHighlight>
     </View>
@@ -97,6 +101,17 @@ const CreditsCounter = ({ playerID, reset }: CreditsCounterProps) => {
 const styles = StyleSheet.create({
   counterContainer: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  infoContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  creditsTextContainer: {
+    width: 60,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -118,6 +133,10 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: '50%',
   },
+  adjustButtonText: {
+    color: 'rgba(255, 255, 255, 0.5)',
+    zIndex: 0,
+  },
   plusIcon: {
     flex: 1,
     justifyContent: 'center',
@@ -131,9 +150,9 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   creditsIcon: {
-    position: 'absolute',
-    width: 70,
-    height: 70,
+    position: 'relative',
+    width: 50,
+    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 0,
@@ -144,7 +163,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textShadowColor: '#000000',
     textShadowRadius: 5,
-    color: '#FFFFFF',
+    color: '#FFF',
     zIndex: 0,
   },
 });

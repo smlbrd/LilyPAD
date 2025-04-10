@@ -78,7 +78,7 @@ const CreditsCounter = ({ playerID, reset }: CreditsCounterProps) => {
         underlayColor="rgba(255, 255, 255, 0.2)"
       >
         <View style={[styles.touchableArea, styles.minusIcon]}>
-          <Text style={styles.creditsText}>-</Text>
+          <Text style={[styles.creditsText, styles.adjustButtonText]}>-</Text>
         </View>
       </TouchableHighlight>
       <TouchableHighlight
@@ -87,7 +87,7 @@ const CreditsCounter = ({ playerID, reset }: CreditsCounterProps) => {
         underlayColor="rgba(255, 255, 255, 0.2)"
       >
         <View style={[styles.touchableArea, styles.plusIcon]}>
-          <Text style={styles.creditsText}>+</Text>
+          <Text style={[styles.creditsText, styles.adjustButtonText]}>+</Text>
         </View>
       </TouchableHighlight>
     </View>
@@ -117,6 +117,10 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     width: '50%',
+  },
+  adjustButtonText: {
+    color: 'rgba(255, 255, 255, 0.5)',
+    zIndex: 0,
   },
   plusIcon: {
     flex: 1,

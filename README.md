@@ -4,6 +4,12 @@ LilyPAD is a tabletop companion for [Netrunner](https://nullsignal.games/about/n
 
 This project is developed with [React Native](https://reactnative.dev/) & [Expo](https://expo.dev).
 
+## Minimum requirements
+
+```
+Node 22.8.0
+```
+
 ## Get started
 
 1. Install dependencies

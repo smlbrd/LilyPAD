@@ -26,13 +26,13 @@ const SettingsMenu = ({ playerID }: SettingsMenuProps) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <View>
-      <TouchableOpacity
+    <View style={styles.menuContainer}>
+      <Pressable
         style={[styles.iconButton, { backgroundColor: theme.background }]}
         onPress={() => setModalVisible(true)}
       >
         <Image source={SettingsMenuIcon} />
-      </TouchableOpacity>
+      </Pressable>
 
       <Modal
         animationType="fade"
@@ -96,13 +96,19 @@ const SettingsMenu = ({ playerID }: SettingsMenuProps) => {
 };
 
 const styles = StyleSheet.create({
-  iconButton: {
-    width: 80,
-    height: 80,
+  menuContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: '#FFFFFF',
-    borderWidth: 2,
+  },
+  iconButton: {
+    position: 'absolute',
+    top: 0,
+    width: 80,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    zIndex: 10,
   },
   iconText: {
     fontSize: 24,

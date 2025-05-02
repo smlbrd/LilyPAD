@@ -7,7 +7,7 @@ This project is developed with [React Native](https://reactnative.dev/) & [Expo]
 ## Minimum requirements
 
 ```
-- Node v22.8.0
+- Node v22.15.0
 ```
 
 ## Get started

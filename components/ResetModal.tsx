@@ -71,9 +71,9 @@ const ResetModal = ({ onReset }: ResetModalProps) => {
 
 const styles = StyleSheet.create({
   resetButton: {
-    height: 80,
-    width: 80,
-    padding: 20,
+    height: 60,
+    width: 60,
+    margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },

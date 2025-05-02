@@ -18,19 +18,23 @@ export default function Index() {
     <PlayerThemeProvider>
       <View style={styles.homeContainer}>
         <View style={[styles.playerContainer, styles.farContainer]}>
-          <AgendaScore reset={resetState} />
+          <View style={styles.settingsAndAgendaContainer}>
+            <SettingsMenu playerID="player2" />
+            <AgendaScore reset={resetState} />
+          </View>
           <ToggleClicks userRole={'runner'} reset={resetState} />
           <CreditsCounter playerID="player2" reset={resetState} />
         </View>
 
         <View style={styles.dividerContainer}>
-          <SettingsMenu playerID="player2" />
           <ResetModal onReset={handleReset} />
-          <SettingsMenu playerID="player1" />
         </View>
 
         <View style={styles.playerContainer}>
-          <AgendaScore reset={resetState} />
+          <View style={styles.settingsAndAgendaContainer}>
+            <SettingsMenu playerID="player1" />
+            <AgendaScore reset={resetState} />
+          </View>
           <ToggleClicks userRole={'corp'} reset={resetState} />
           <CreditsCounter playerID="player1" reset={resetState} />
         </View>
@@ -46,6 +50,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
   },
   playerContainer: {
+    flex: 1,
+  },
+  settingsAndAgendaContainer: {
+    position: 'relative',
     flex: 1,
   },
   dividerContainer: {

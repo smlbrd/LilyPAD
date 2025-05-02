@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
   scoreText: {
+    top: 15,
     fontSize: 50,
     fontWeight: 'bold',
     textAlign: 'center',

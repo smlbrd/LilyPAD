@@ -19,7 +19,7 @@ export default function Index() {
       <View style={styles.homeContainer}>
         <View style={[styles.playerContainer, styles.farContainer]}>
           <View style={styles.settingsAndAgendaContainer}>
-            <SettingsMenu playerID="player2" />
+            {/* <SettingsMenu playerID="player2" /> */}
             <AgendaScore reset={resetState} />
           </View>
           <ToggleClicks userRole={'runner'} reset={resetState} />
@@ -32,7 +32,7 @@ export default function Index() {
 
         <View style={styles.playerContainer}>
           <View style={styles.settingsAndAgendaContainer}>
-            <SettingsMenu playerID="player1" />
+            {/* <SettingsMenu playerID="player1" /> */}
             <AgendaScore reset={resetState} />
           </View>
           <ToggleClicks userRole={'corp'} reset={resetState} />

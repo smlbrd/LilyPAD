@@ -28,7 +28,7 @@ const SettingsMenu = ({ playerID }: SettingsMenuProps) => {
   return (
     <View style={styles.menuContainer}>
       <Pressable
-        style={[styles.iconButton, { backgroundColor: theme.background }]}
+        style={styles.iconButton}
         onPress={() => setModalVisible(true)}
       >
         <Image source={SettingsMenuIcon} />
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     zIndex: 10,
   },
   iconText: {

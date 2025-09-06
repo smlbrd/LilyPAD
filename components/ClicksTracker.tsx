@@ -18,7 +18,8 @@ const ClicksTracker = () => {
     });
   }, [clicksCount]);
 
-  const canIncrement = clicksCount <= 4 || createClicks.every((spent) => !spent);
+  const canIncrement =
+    clicksCount > 4 || (clicksCount < 5 && createClicks.every((spent) => !spent));
   const canDecrement = clicksCount > 3;
 
   const handleIncrement = () => {

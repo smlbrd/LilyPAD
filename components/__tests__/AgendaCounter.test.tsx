@@ -1,4 +1,4 @@
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 import AgendaCounter from '../AgendaCounter';
 import { ResetProvider } from '../../contexts/ResetContext';
 import ResetButton from '../ResetButton';
@@ -31,8 +31,8 @@ describe('AgendaCounter', () => {
     expect(getByText('7')).toBeTruthy();
   });
 
-  it('resets agenda points when reset is triggered', () => {
-    const { getByText, getByTestId } = render(
+  it('resets agenda points when reset is triggered', async () => {
+    const { findByText, getByText, getByTestId } = render(
       <ResetProvider>
         <AgendaCounter />
         <ResetButton />
@@ -42,9 +42,10 @@ describe('AgendaCounter', () => {
     fireEvent.press(getByText('+'));
     expect(getByText('1')).toBeTruthy();
 
-    act(() => {
-      fireEvent.press(getByTestId('reset-button'));
-    });
+    fireEvent.press(getByTestId('reset-button'));
+
+    const confirmResetButton = await findByText('Reset');
+    fireEvent.press(confirmResetButton);
 
     expect(getByText('0')).toBeTruthy();
   });

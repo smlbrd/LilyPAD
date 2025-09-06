@@ -25,3 +25,7 @@ This project is developed with [React Native](https://reactnative.dev/) & [Expo]
    ```
 
 Then scan the QR code using the Expo Go mobile app (available via Google Play/Apple Store), or hit W to open the web app emulator.
+
+## Credits
+
+Reset Icon by <a href='https://iconpacks.net/?utm_source=link-attribution&utm_content=14414'>Iconpacks</a>

@@ -1,5 +1,6 @@
 import { Text, View } from 'react-native';
 import AgendaCounter from './AgendaCounter';
+import ClicksTracker from './ClicksTracker';
 import CreditCounter from './CreditCounter';
 
 export default function PlayerArea() {
@@ -10,6 +11,9 @@ export default function PlayerArea() {
       </View>
       <View className="w-full flex-1">
         <AgendaCounter />
+      </View>
+      <View className="w-full flex-1">
+        <ClicksTracker />
       </View>
       <View className="w-full flex-1">
         <CreditCounter />

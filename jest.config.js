@@ -5,5 +5,7 @@ module.exports = {
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   moduleNameMapper: {
     '\\.svg$': '<rootDir>/__mocks__/svgMock.js',
+    '^~/(.*)$': '<rootDir>/src/$1',
   },
+  roots: ['<rootDir>'],
 };

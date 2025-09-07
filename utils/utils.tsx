@@ -8,13 +8,8 @@ export function getAgendaColumns(maxScore: number, currentScore: number) {
 
 export function rollDice(max: number): string | number {
   if (max === 2) {
-    const result = Math.floor(Math.random() * max) + 1;
-
-    if (result === 1) {
-      return 'heads';
-    } else {
-      return 'tails';
-    }
+    return Math.random() < 0.5 ? 'Heads' : 'Tails';
   }
+
   return Math.floor(Math.random() * max) + 1;
 }

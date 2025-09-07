@@ -48,7 +48,7 @@ describe('DiceRoller', () => {
     fireEvent.press(getByTestId('dice-icon-d6'));
 
     await waitFor(() => {
-      expect(getByText('Your result is...')).toBeTruthy();
+      expect(getByText('Your roll is')).toBeTruthy();
       expect(getByText('5')).toBeTruthy();
     });
   });
@@ -76,5 +76,33 @@ describe('DiceRoller', () => {
     fireEvent.press(getByText('Close'));
 
     expect(queryByText('2')).toBeNull();
+  });
+
+  it('shows coin flip result modal after coinflip', async () => {
+    (rollDice as jest.Mock).mockReturnValue('heads');
+    const { getByTestId, getByText } = render(<DiceRoller />);
+
+    fireEvent.press(getByTestId('dice-button'));
+    fireEvent.press(getByTestId('dice-icon-coinflip'));
+
+    await waitFor(() => {
+      expect(getByText('Your coin landed on')).toBeTruthy();
+      expect(getByText('Heads')).toBeTruthy();
+    });
+  });
+
+  it('shows mark result modal after mark roll', async () => {
+    jest.spyOn(global.Math, 'random').mockReturnValue(0);
+    const { getByTestId, getByText } = render(<DiceRoller />);
+
+    fireEvent.press(getByTestId('dice-button'));
+    fireEvent.press(getByTestId('dice-icon-mark'));
+
+    await waitFor(() => {
+      expect(getByText('Your mark is')).toBeTruthy();
+      expect(getByText('Archives')).toBeTruthy();
+    });
+
+    (global.Math.random as jest.Mock).mockRestore?.();
   });
 });

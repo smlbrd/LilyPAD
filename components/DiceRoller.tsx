@@ -4,6 +4,9 @@ import GenericModal from './GenericModal';
 import TargetIcon from '../assets/TARGET_ICON.png';
 import QuestionIcon from '../assets/QUESTION_ICON.png';
 import DiceIconButton from './DiceIconButton';
+import ArchivesIcon from '../assets/NSG_ARCHIVES.svg';
+import HQIcon from '../assets/NSG_HQ.svg';
+import RDIcon from '../assets/NSG_RD.svg';
 import { rollDice } from '../utils/utils';
 
 const DiceRoller = () => {
@@ -11,8 +14,16 @@ const DiceRoller = () => {
   const [isRollResultModalVisible, setIsRollResultModalVisible] = useState(false);
   const [rollResult, setRollResult] = useState<number | string | null>(null);
 
-  const handleRoll = (max: number) => {
+  const handleDiceRoll = (max: number) => {
     const result = rollDice(max);
+
+    setRollResult(result);
+    setIsRollResultModalVisible(true);
+  };
+
+  const handleMarkRoll = () => {
+    const outcomes = ['Archives', 'R&D', 'HQ'];
+    const result = outcomes[Math.floor(Math.random() * outcomes.length)];
 
     setRollResult(result);
     setIsRollResultModalVisible(true);
@@ -53,12 +64,17 @@ const DiceRoller = () => {
 
         <View className="mt-4 w-full flex-1 justify-center">
           <View className="mb-2 flex w-full flex-row justify-evenly gap-1">
-            <DiceIconButton label="mark" icon={TargetIcon} testID="dice-icon-mark" />
+            <DiceIconButton
+              label="mark"
+              icon={TargetIcon}
+              testID="dice-icon-mark"
+              onPress={handleMarkRoll}
+            />
             <DiceIconButton label="random" icon={QuestionIcon} testID="dice-icon-random" />
             <DiceIconButton
               label="coinflip"
               iconChar={'\uF118'}
-              onPress={() => handleRoll(2)}
+              onPress={() => handleDiceRoll(2)}
               testID="dice-icon-coinflip"
             />
           </View>
@@ -66,19 +82,19 @@ const DiceRoller = () => {
             <DiceIconButton
               label="d4"
               iconChar={'\uF130'}
-              onPress={() => handleRoll(4)}
+              onPress={() => handleDiceRoll(4)}
               testID="dice-icon-d4"
             />
             <DiceIconButton
               label="d6"
               iconChar={'\uF136'}
-              onPress={() => handleRoll(6)}
+              onPress={() => handleDiceRoll(6)}
               testID="dice-icon-d6"
             />
             <DiceIconButton
               label="d8"
               iconChar={'\uF13E'}
-              onPress={() => handleRoll(8)}
+              onPress={() => handleDiceRoll(8)}
               testID="dice-icon-d8"
             />
           </View>
@@ -86,19 +102,19 @@ const DiceRoller = () => {
             <DiceIconButton
               label="d10"
               iconChar={'\uF102'}
-              onPress={() => handleRoll(10)}
+              onPress={() => handleDiceRoll(10)}
               testID="dice-icon-d10"
             />
             <DiceIconButton
               label="d12"
               iconChar={'\uF10E'}
-              onPress={() => handleRoll(12)}
+              onPress={() => handleDiceRoll(12)}
               testID="dice-icon-d12"
             />
             <DiceIconButton
               label="d20"
               iconChar={'\uF125'}
-              onPress={() => handleRoll(20)}
+              onPress={() => handleDiceRoll(20)}
               testID="dice-icon-d20"
             />
           </View>
@@ -109,7 +125,7 @@ const DiceRoller = () => {
         visible={isRollResultModalVisible}
         onClose={() => setIsRollResultModalVisible(false)}
         title={`probability_output`}
-        modalClassName="w-1/2"
+        modalClassName="w-2/3"
         actions={
           <>
             <TouchableOpacity
@@ -122,7 +138,28 @@ const DiceRoller = () => {
           </>
         }>
         <View className="flex items-center justify-center p-2">
-          <Text className="text-lg text-white">Your result is...</Text>
+          <Text className="text-lg text-white">{`Your ${
+            typeof rollResult === 'number'
+              ? 'roll is'
+              : rollResult === 'Heads' || rollResult === 'Tails'
+                ? 'coin landed on'
+                : 'mark is'
+          }`}</Text>
+          {rollResult === 'Archives' && (
+            <View className="my-2">
+              <ArchivesIcon width={48} height={48} fill="#FFF" />
+            </View>
+          )}
+          {rollResult === 'R&D' && (
+            <View className="my-2">
+              <RDIcon width={48} height={48} fill="#FFF" />
+            </View>
+          )}
+          {rollResult === 'HQ' && (
+            <View className="my-2">
+              <HQIcon width={48} height={48} fill="#FFF" />
+            </View>
+          )}
           <Text className="text-3xl font-bold text-white">{rollResult}</Text>
         </View>
       </GenericModal>

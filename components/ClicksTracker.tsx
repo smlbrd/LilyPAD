@@ -2,10 +2,16 @@ import { useState, useEffect } from 'react';
 import { Text, TouchableHighlight, View } from 'react-native';
 import ClickDefault from '../assets/NSG_CLICK_DEFAULT.svg';
 import ClickSpent from '../assets/NSG_CLICK_SPENT.svg';
+import { useReset } from '../contexts/ResetContext';
 
 const ClicksTracker = () => {
   const [clicksCount, setClicksCount] = useState(3);
   const [createClicks, setCreateClicks] = useState<boolean[]>(Array(3).fill(false));
+  const { resetCount } = useReset();
+
+  useEffect(() => {
+    setClicksCount(3);
+  }, [resetCount]);
 
   useEffect(() => {
     setCreateClicks((prev) => {
@@ -18,7 +24,8 @@ const ClicksTracker = () => {
     });
   }, [clicksCount]);
 
-  const canIncrement = clicksCount <= 4 || createClicks.every((spent) => !spent);
+  const canIncrement =
+    clicksCount > 4 || (clicksCount < 5 && createClicks.every((spent) => !spent));
   const canDecrement = clicksCount > 3;
 
   const handleIncrement = () => {
@@ -57,8 +64,10 @@ const ClicksTracker = () => {
 
       {isCondensed ? (
         <View className="flex w-4/6 flex-row items-center justify-center">
-          <ClickDefault testID="click-svg-condensed" width={100} height={100} fill="#FFF" />
-          <Text className="text-4xl font-bold text-white">{clicksCount}</Text>
+          <ClickDefault testID="click-svg-condensed" width={70} height={70} fill="#FFF" />
+          <View className="w-10">
+            <Text className="text-4xl font-bold text-white">{clicksCount}</Text>
+          </View>
         </View>
       ) : (
         <View className="flex w-4/6 flex-row items-center justify-evenly">
@@ -69,9 +78,9 @@ const ClicksTracker = () => {
               className="flex flex-1 items-center"
               underlayColor="rgba(255, 255, 255, 0.1)">
               {clicked ? (
-                <ClickSpent testID="click-svg-spent" width={100} height={100} fill="#FFFFFF80" />
+                <ClickSpent testID="click-svg-spent" width={70} height={70} fill="#FFFFFF80" />
               ) : (
-                <ClickDefault testID="click-svg-default" width={100} height={100} fill="#FFF" />
+                <ClickDefault testID="click-svg-default" width={70} height={70} fill="#FFF" />
               )}
             </TouchableHighlight>
           ))}

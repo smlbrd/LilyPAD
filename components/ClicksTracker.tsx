@@ -2,10 +2,16 @@ import { useState, useEffect } from 'react';
 import { Text, TouchableHighlight, View } from 'react-native';
 import ClickDefault from '../assets/NSG_CLICK_DEFAULT.svg';
 import ClickSpent from '../assets/NSG_CLICK_SPENT.svg';
+import { useReset } from '../contexts/ResetContext';
 
 const ClicksTracker = () => {
   const [clicksCount, setClicksCount] = useState(3);
   const [createClicks, setCreateClicks] = useState<boolean[]>(Array(3).fill(false));
+  const { resetCount } = useReset();
+
+  useEffect(() => {
+    setClicksCount(3);
+  }, [resetCount]);
 
   useEffect(() => {
     setCreateClicks((prev) => {

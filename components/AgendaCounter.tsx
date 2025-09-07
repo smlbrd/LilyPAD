@@ -1,7 +1,7 @@
-import Counter from './Counter';
-import { View, Text } from 'react-native';
-import { getAgendaColumns } from '../utils/utils';
 import { useEffect, useState } from 'react';
+import { View, Text } from 'react-native';
+import Counter from './Counter';
+import { getAgendaColumns } from '../utils/utils';
 import { useReset } from '../contexts/ResetContext';
 
 interface AgendaCounterProps {

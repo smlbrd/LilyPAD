@@ -79,7 +79,7 @@ describe('DiceRoller', () => {
   });
 
   it('shows coin flip result modal after coinflip', async () => {
-    (rollDice as jest.Mock).mockReturnValue('heads');
+    (rollDice as jest.Mock).mockReturnValue('Heads');
     const { getByTestId, getByText } = render(<DiceRoller />);
 
     fireEvent.press(getByTestId('dice-button'));

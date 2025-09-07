@@ -10,7 +10,7 @@ export const MainView = () => {
       <View className="relative min-h-screen flex-1 items-center justify-center bg-gradient-to-b from-fuchsia-950 to-indigo-900">
         <View className="w-full flex-1 flex-col justify-between">
           <View className="flex-1 rotate-180">
-            <PlayerArea />
+            <PlayerArea playerId="1" />
           </View>
 
           <View className="flex flex-row items-center justify-evenly">
@@ -19,7 +19,7 @@ export const MainView = () => {
           </View>
 
           <View className="flex-1">
-            <PlayerArea />
+            <PlayerArea playerId="2" />
           </View>
         </View>
       </View>

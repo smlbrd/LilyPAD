@@ -199,7 +199,7 @@ const DiceRoller = () => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              className="ml-2 w-24 items-center justify-center border border-white bg-white px-4 py-2 shadow shadow-white"
+              className="w-24 items-center justify-center border border-white bg-white px-4 py-2 shadow shadow-white"
               onPress={handleCustomRoll}
               disabled={
                 customMax.trim() === '' || isNaN(Number(customMax)) || Number(customMax) < 1

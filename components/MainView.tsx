@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import PlayerArea from './PlayerArea';
 import { ResetProvider } from 'contexts/ResetContext';
 import ResetButton from './ResetButton';
+import DiceRoller from './DiceRoller';
 
 export const MainView = () => {
   return (
@@ -12,8 +13,9 @@ export const MainView = () => {
             <PlayerArea />
           </View>
 
-          <View className="items-center">
+          <View className="flex flex-row items-center justify-center gap-x-4">
             <ResetButton />
+            <DiceRoller />
           </View>
 
           <View className="flex-1">

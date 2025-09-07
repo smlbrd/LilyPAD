@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import Counter from './Counter';
+import GenericCounter from './GenericCounter';
 import { getAgendaColumns } from '../utils/utils';
 import { useReset } from '../contexts/ResetContext';
 
@@ -17,7 +17,7 @@ const AgendaCounter = ({ maxAgendaPoints = 7 }: AgendaCounterProps) => {
   }, [resetCount]);
 
   return (
-    <Counter
+    <GenericCounter
       max={maxAgendaPoints}
       value={currentAgendaPoints}
       onChange={setCurrentAgendaPoints}

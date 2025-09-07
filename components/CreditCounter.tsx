@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import Counter from './Counter';
+import GenericCounter from './GenericCounter';
 import CreditIcon from '../assets/NSG_CREDIT.svg';
 import { useReset } from '../contexts/ResetContext';
 
@@ -13,7 +13,7 @@ const CreditCounter = () => {
   }, [resetCount]);
 
   return (
-    <Counter
+    <GenericCounter
       value={credits}
       min={0}
       onChange={setCredits}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import GenericModal from './GenericModal';
 import TargetIcon from '../assets/TARGET_ICON.png';
 import QuestionIcon from '../assets/QUESTION_ICON.png';
@@ -11,8 +11,10 @@ import { rollDice } from '../utils/utils';
 
 const DiceRoller = () => {
   const [isSelectDiceModalVisible, setIsSelectDiceModalVisible] = useState(false);
+  const [isCustomRollModalVisible, setIsCustomRollModalVisible] = useState(false);
   const [isRollResultModalVisible, setIsRollResultModalVisible] = useState(false);
   const [rollResult, setRollResult] = useState<number | string | null>(null);
+  const [customMax, setCustomMax] = useState('');
 
   const handleDiceRoll = (max: number) => {
     const result = rollDice(max);
@@ -27,6 +29,13 @@ const DiceRoller = () => {
 
     setRollResult(result);
     setIsRollResultModalVisible(true);
+  };
+
+  const handleCustomRoll = () => {
+    handleDiceRoll(Number(customMax));
+
+    setIsCustomRollModalVisible(false);
+    setCustomMax('');
   };
 
   return (
@@ -70,7 +79,12 @@ const DiceRoller = () => {
               testID="dice-icon-mark"
               onPress={handleMarkRoll}
             />
-            <DiceIconButton label="random" icon={QuestionIcon} testID="dice-icon-random" />
+            <DiceIconButton
+              label="custom"
+              icon={QuestionIcon}
+              testID="dice-icon-custom"
+              onPress={() => setIsCustomRollModalVisible(true)}
+            />
             <DiceIconButton
               label="coinflip"
               iconChar={'\uF118'}
@@ -161,6 +175,53 @@ const DiceRoller = () => {
             </View>
           )}
           <Text className="text-3xl font-bold text-white">{rollResult}</Text>
+        </View>
+      </GenericModal>
+
+      <GenericModal
+        visible={isCustomRollModalVisible}
+        onClose={() => {
+          setIsCustomRollModalVisible(false);
+          setCustomMax('');
+        }}
+        title="probability_output"
+        modalClassName="w-2/3"
+        actions={
+          <>
+            <TouchableOpacity
+              className="w-24 items-center justify-center border border-white px-4 py-2 shadow shadow-white"
+              onPress={() => {
+                setIsCustomRollModalVisible(false);
+                setCustomMax('');
+              }}>
+              <Text className="text-center text-base font-semibold tracking-widest text-white">
+                Cancel
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              className="ml-2 w-24 items-center justify-center border border-white bg-white px-4 py-2 shadow shadow-white"
+              onPress={handleCustomRoll}
+              disabled={
+                customMax.trim() === '' || isNaN(Number(customMax)) || Number(customMax) < 1
+              }>
+              <Text className="text-center text-base font-semibold tracking-widest text-black">
+                Roll
+              </Text>
+            </TouchableOpacity>
+          </>
+        }>
+        <Text className="mb-2 text-center text-white">Generate number between 1 and</Text>
+        <View className="w-full items-center">
+          <TextInput
+            className="mb-2 mt-2 w-32 border border-white bg-zinc-800 px-4 py-2 text-xl text-white"
+            keyboardType="numeric"
+            value={customMax}
+            onChangeText={setCustomMax}
+            placeholder="100"
+            placeholderTextColor="#888"
+            maxLength={10}
+            testID="dice-input-custom"
+          />
         </View>
       </GenericModal>
     </View>

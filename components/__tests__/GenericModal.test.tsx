@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 import { Text } from 'react-native';
 import GenericModal from '../GenericModal';
 
@@ -23,18 +23,6 @@ describe('GenericModal', () => {
 
     expect(queryByText('Hidden Title')).toBeNull();
     expect(queryByText('Hidden Content')).toBeNull();
-  });
-
-  it('calls onClose when backdrop is pressed', () => {
-    const onClose = jest.fn();
-    const { getByTestId } = render(
-      <GenericModal visible={true} onClose={onClose} title="Close Test">
-        <Text>Content</Text>
-      </GenericModal>
-    );
-
-    fireEvent.press(getByTestId('modal-backdrop'));
-    expect(onClose).toHaveBeenCalled();
   });
 
   it('renders actions if provided', () => {

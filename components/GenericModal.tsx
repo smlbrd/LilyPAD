@@ -19,10 +19,7 @@ const GenericModal = ({
   modalClassName = 'w-4/5',
 }: GenericModalProps) => (
   <Modal transparent visible={visible} onRequestClose={onClose}>
-    <Pressable
-      testID="modal-backdrop"
-      className="flex-1 items-center justify-center bg-black/60"
-      onPress={onClose}>
+    <Pressable testID="modal-backdrop" className="flex-1 items-center justify-center bg-black/60">
       <View
         className={`border-x-2 border-t-2 border-white bg-black px-2 py-1 shadow shadow-white ${modalClassName}`}>
         <Text className="text-sm text-white">{title}</Text>

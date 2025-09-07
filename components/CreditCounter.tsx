@@ -19,7 +19,7 @@ const CreditCounter = () => {
       onChange={setCredits}
       renderDisplay={(credits) => (
         <View className="pointer-events-none absolute left-0 right-0 z-10 h-full flex-row items-center justify-center">
-          <CreditIcon width={50} height={50} fill="#FFF" />
+          <CreditIcon width={40} height={40} fill="#FFF" />
           <View className="w-10">
             <Text className="text-nowrap text-center text-4xl font-bold text-white">{credits}</Text>
           </View>

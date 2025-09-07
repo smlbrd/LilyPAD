@@ -64,8 +64,10 @@ const ClicksTracker = () => {
 
       {isCondensed ? (
         <View className="flex w-4/6 flex-row items-center justify-center">
-          <ClickDefault testID="click-svg-condensed" width={100} height={100} fill="#FFF" />
-          <Text className="text-4xl font-bold text-white">{clicksCount}</Text>
+          <ClickDefault testID="click-svg-condensed" width={70} height={70} fill="#FFF" />
+          <View className="w-10">
+            <Text className="text-4xl font-bold text-white">{clicksCount}</Text>
+          </View>
         </View>
       ) : (
         <View className="flex w-4/6 flex-row items-center justify-evenly">
@@ -76,9 +78,9 @@ const ClicksTracker = () => {
               className="flex flex-1 items-center"
               underlayColor="rgba(255, 255, 255, 0.1)">
               {clicked ? (
-                <ClickSpent testID="click-svg-spent" width={100} height={100} fill="#FFFFFF80" />
+                <ClickSpent testID="click-svg-spent" width={70} height={70} fill="#FFFFFF80" />
               ) : (
-                <ClickDefault testID="click-svg-default" width={100} height={100} fill="#FFF" />
+                <ClickDefault testID="click-svg-default" width={70} height={70} fill="#FFF" />
               )}
             </TouchableHighlight>
           ))}

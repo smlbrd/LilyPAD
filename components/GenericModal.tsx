@@ -7,6 +7,7 @@ type GenericModalProps = {
   title?: string;
   children?: ReactNode;
   actions?: ReactNode;
+  modalClassName?: string;
 };
 
 const GenericModal = ({
@@ -15,17 +16,19 @@ const GenericModal = ({
   title,
   children,
   actions,
+  modalClassName = 'w-4/5',
 }: GenericModalProps) => (
   <Modal transparent visible={visible} onRequestClose={onClose}>
     <Pressable
       testID="modal-backdrop"
-      className="flex-1 items-center justify-center bg-black/40"
+      className="flex-1 items-center justify-center bg-black/60"
       onPress={onClose}>
-      <View className="w-4/5 border-x-2 border-t-2 border-white bg-black px-2 py-1 shadow shadow-white">
+      <View
+        className={`border-x-2 border-t-2 border-white bg-black px-2 py-1 shadow shadow-white ${modalClassName}`}>
         <Text className="text-sm text-white">{title}</Text>
       </View>
-      <View className="w-4/5 border-2 border-white bg-black shadow shadow-white">
-        <View className="mb-4 p-2">{children}</View>
+      <View className={`border-2 border-white bg-black shadow shadow-white ${modalClassName}`}>
+        <View className="p-2">{children}</View>
         <View className="mb-4 flex-row items-center justify-evenly">{actions}</View>
       </View>
     </Pressable>

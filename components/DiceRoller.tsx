@@ -9,7 +9,7 @@ import { rollDice } from '../utils/utils';
 const DiceRoller = () => {
   const [isSelectDiceModalVisible, setIsSelectDiceModalVisible] = useState(false);
   const [isRollResultModalVisible, setIsRollResultModalVisible] = useState(false);
-  const [rollResult, setRollResult] = useState<number | null>(null);
+  const [rollResult, setRollResult] = useState<number | string | null>(null);
 
   const handleRoll = (max: number) => {
     const result = rollDice(max);
@@ -51,21 +51,56 @@ const DiceRoller = () => {
         </Text>
         <Text className="text-sm font-bold text-white">{' > choose a randomiser:'}</Text>
 
-        <View className="mt-4 w-full flex-1 justify-center gap-2">
-          <View className="mb-2 flex w-full flex-row justify-evenly gap-2">
-            <DiceIconButton label="mark" icon={TargetIcon} />
-            <DiceIconButton label="random" icon={QuestionIcon} />
-            <DiceIconButton label="coin flip" iconChar={'\uF118'} onPress={() => handleRoll(2)} />
+        <View className="mt-4 w-full flex-1 justify-center">
+          <View className="mb-2 flex w-full flex-row justify-evenly gap-1">
+            <DiceIconButton label="mark" icon={TargetIcon} testID="dice-icon-mark" />
+            <DiceIconButton label="random" icon={QuestionIcon} testID="dice-icon-random" />
+            <DiceIconButton
+              label="coinflip"
+              iconChar={'\uF118'}
+              onPress={() => handleRoll(2)}
+              testID="dice-icon-coinflip"
+            />
           </View>
-          <View className="mb-2 flex w-full flex-row justify-evenly gap-2">
-            <DiceIconButton label="d4" iconChar={'\uF130'} onPress={() => handleRoll(4)} />
-            <DiceIconButton label="d6" iconChar={'\uF136'} onPress={() => handleRoll(6)} />
-            <DiceIconButton label="d8" iconChar={'\uF13E'} onPress={() => handleRoll(8)} />
+          <View className="mb-2 flex w-full flex-row justify-evenly gap-1">
+            <DiceIconButton
+              label="d4"
+              iconChar={'\uF130'}
+              onPress={() => handleRoll(4)}
+              testID="dice-icon-d4"
+            />
+            <DiceIconButton
+              label="d6"
+              iconChar={'\uF136'}
+              onPress={() => handleRoll(6)}
+              testID="dice-icon-d6"
+            />
+            <DiceIconButton
+              label="d8"
+              iconChar={'\uF13E'}
+              onPress={() => handleRoll(8)}
+              testID="dice-icon-d8"
+            />
           </View>
-          <View className="flex w-full flex-row justify-evenly gap-2">
-            <DiceIconButton label="d10" iconChar={'\uF102'} onPress={() => handleRoll(10)} />
-            <DiceIconButton label="d12" iconChar={'\uF10E'} onPress={() => handleRoll(12)} />
-            <DiceIconButton label="d20" iconChar={'\uF125'} onPress={() => handleRoll(20)} />
+          <View className="flex w-full flex-row justify-evenly gap-1">
+            <DiceIconButton
+              label="d10"
+              iconChar={'\uF102'}
+              onPress={() => handleRoll(10)}
+              testID="dice-icon-d10"
+            />
+            <DiceIconButton
+              label="d12"
+              iconChar={'\uF10E'}
+              onPress={() => handleRoll(12)}
+              testID="dice-icon-d12"
+            />
+            <DiceIconButton
+              label="d20"
+              iconChar={'\uF125'}
+              onPress={() => handleRoll(20)}
+              testID="dice-icon-d20"
+            />
           </View>
         </View>
       </GenericModal>
@@ -74,6 +109,7 @@ const DiceRoller = () => {
         visible={isRollResultModalVisible}
         onClose={() => setIsRollResultModalVisible(false)}
         title={`probability_output`}
+        modalClassName="w-1/2"
         actions={
           <>
             <TouchableOpacity
@@ -85,8 +121,9 @@ const DiceRoller = () => {
             </TouchableOpacity>
           </>
         }>
-        <View className="flex items-center justify-center py-8">
-          <Text className="text-4xl font-bold text-white">{rollResult}</Text>
+        <View className="flex items-center justify-center p-2">
+          <Text className="text-lg text-white">Your result is...</Text>
+          <Text className="text-3xl font-bold text-white">{rollResult}</Text>
         </View>
       </GenericModal>
     </View>

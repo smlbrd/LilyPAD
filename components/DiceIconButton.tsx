@@ -6,11 +6,13 @@ type DiceIconButtonProps = {
   icon?: any;
   iconChar?: string;
   style?: StyleProp<ViewStyle>;
+  testID?: string;
 };
 
-const DiceIconButton = ({ label, onPress, icon, iconChar, style }: DiceIconButtonProps) => (
+const DiceIconButton = ({ label, onPress, icon, iconChar, style, testID }: DiceIconButtonProps) => (
   <View className="items-center" style={style}>
     <TouchableOpacity
+      testID={testID}
       className="m-1 h-16 w-16 items-center justify-center rounded border border-white bg-black/30 p-2"
       onPress={onPress}>
       {icon ? (

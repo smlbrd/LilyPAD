@@ -11,7 +11,7 @@ type PlayerAreaProps = {
 };
 
 export default function PlayerArea({ playerId }: PlayerAreaProps) {
-  const storageKey = `playerName_${playerId}`;
+  const storageKey = `user_${playerId}`;
   const [playerName, setPlayerName] = useState('User');
   const [modalVisible, setModalVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -34,10 +34,10 @@ export default function PlayerArea({ playerId }: PlayerAreaProps) {
   };
 
   return (
-    <View className="m-2 flex-1 items-center justify-start rounded-2xl bg-black/10">
+    <View className="mt-2 flex-1 items-start justify-start bg-black/20">
       <View
         style={{ minWidth: 40 }}
-        className="m-1 rounded-sm border border-white bg-white/20 px-4 py-2 shadow-md shadow-white/90">
+        className="border-2 border-white bg-black px-4 py-2 shadow-sm shadow-white">
         <TouchableOpacity onPress={openModal} testID={`player-nametag-${playerId}`}>
           <Text style={{ fontFamily: 'monkirta' }} className="text-lg tracking-widest text-white">
             {playerName}
@@ -45,13 +45,13 @@ export default function PlayerArea({ playerId }: PlayerAreaProps) {
         </TouchableOpacity>
       </View>
       <View className="w-full flex-1">
-        <AgendaCounter />
+        <AgendaCounter playerId={playerId} />
       </View>
       <View className="w-full flex-1">
         <ClicksTracker />
       </View>
       <View className="w-full flex-1">
-        <CreditCounter />
+        <CreditCounter playerId={playerId} />
       </View>
 
       <GenericModal

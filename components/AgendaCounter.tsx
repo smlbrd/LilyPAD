@@ -3,18 +3,40 @@ import { View, Text } from 'react-native';
 import GenericCounter from './GenericCounter';
 import { getAgendaColumns } from '../utils/utils';
 import { useReset } from '../contexts/ResetContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface AgendaCounterProps {
   maxAgendaPoints?: number;
+  playerId: string;
 }
 
-const AgendaCounter = ({ maxAgendaPoints = 7 }: AgendaCounterProps) => {
+const STORAGE_KEY = (id: string) => `agendas_${id}`;
+
+const loadAgendaPoints = async (playerId: string) => {
+  const value = await AsyncStorage.getItem(STORAGE_KEY(playerId));
+  return value !== null ? Number(value) : 0;
+};
+
+const saveAgendaPoints = async (playerId: string, points: number) => {
+  await AsyncStorage.setItem(STORAGE_KEY(playerId), String(points));
+};
+
+const AgendaCounter = ({ maxAgendaPoints = 7, playerId }: AgendaCounterProps) => {
   const [currentAgendaPoints, setCurrentAgendaPoints] = useState(0);
   const { resetCount } = useReset();
 
   useEffect(() => {
+    loadAgendaPoints(playerId).then(setCurrentAgendaPoints);
+  }, [playerId]);
+
+  useEffect(() => {
     setCurrentAgendaPoints(0);
-  }, [resetCount]);
+    saveAgendaPoints(playerId, 0);
+  }, [resetCount, playerId]);
+
+  useEffect(() => {
+    saveAgendaPoints(playerId, currentAgendaPoints);
+  }, [currentAgendaPoints, playerId]);
 
   return (
     <GenericCounter

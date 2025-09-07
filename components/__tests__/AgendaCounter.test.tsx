@@ -5,24 +5,24 @@ import ResetButton from '../ResetButton';
 
 describe('AgendaCounter', () => {
   it('renders the initial agenda value', () => {
-    const { getByText } = render(<AgendaCounter />);
+    const { getByText } = render(<AgendaCounter playerId="User1" />);
     expect(getByText('0')).toBeTruthy();
   });
 
   it('increments the agenda value', () => {
-    const { getByText } = render(<AgendaCounter />);
+    const { getByText } = render(<AgendaCounter playerId="User1" />);
     fireEvent.press(getByText('+'));
     expect(getByText('1')).toBeTruthy();
   });
 
   it('decrements the agenda value below zero', () => {
-    const { getByText } = render(<AgendaCounter />);
+    const { getByText } = render(<AgendaCounter playerId="User1" />);
     fireEvent.press(getByText('-'));
     expect(getByText('-1')).toBeTruthy();
   });
 
   it('increments up to a default max of 7', () => {
-    const { getByText } = render(<AgendaCounter />);
+    const { getByText } = render(<AgendaCounter playerId="User1" />);
 
     for (let i = 0; i < 10; i++) {
       fireEvent.press(getByText('+'));
@@ -34,7 +34,7 @@ describe('AgendaCounter', () => {
   it('resets agenda points when reset is triggered', async () => {
     const { findByText, getByText, getByTestId } = render(
       <ResetProvider>
-        <AgendaCounter />
+        <AgendaCounter playerId="User1" />
         <ResetButton />
       </ResetProvider>
     );

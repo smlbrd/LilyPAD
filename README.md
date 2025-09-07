@@ -28,4 +28,5 @@ Then scan the QR code using the Expo Go mobile app (available via Google Play/Ap
 
 ## Credits
 
-Reset Icon by <a href='https://iconpacks.net/?utm_source=link-attribution&utm_content=14414'>Iconpacks</a>
+<a target="_blank" href="https://icons8.com/icon/82732/restart">Reset</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+Dice Icons by <a href='https://dicefont.com/'>Dicefont</a>

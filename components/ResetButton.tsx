@@ -26,7 +26,7 @@ const ResetButton = () => {
         actions={
           <>
             <TouchableOpacity
-              className="mr-4 w-24 items-center justify-center border border-white px-4 py-2 shadow shadow-white"
+              className="w-24 items-center justify-center border border-white px-4 py-2 shadow shadow-white"
               onPress={() => setModalVisible(false)}>
               <Text className="text-center text-base font-semibold tracking-widest text-white">
                 Cancel
@@ -49,8 +49,8 @@ const ResetButton = () => {
             '\n > welcome, root \n > EXECUTE SYSTEM PURGE \n > loading... \n > running d4t4-b3gon3.exe'
           }
         </Text>
-        <Text className="text-sm text-white">
-          {' > warning: this will reset all values to default \n > proceed?'}
+        <Text className="text-sm font-bold text-white">
+          {' > this will reset all values to default \n > proceed?'}
         </Text>
       </GenericModal>
     </View>

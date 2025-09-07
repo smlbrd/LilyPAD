@@ -1,29 +1,40 @@
 import { useState } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+import GenericModal from './GenericModal';
 import TargetIcon from '../assets/TARGET_ICON.png';
 import QuestionIcon from '../assets/QUESTION_ICON.png';
-import GenericModal from './GenericModal';
+import DiceIconButton from './DiceIconButton';
+import { rollDice } from '../utils/utils';
 
 const DiceRoller = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [isSelectDiceModalVisible, setIsSelectDiceModalVisible] = useState(false);
+  const [isRollResultModalVisible, setIsRollResultModalVisible] = useState(false);
+  const [rollResult, setRollResult] = useState<number | null>(null);
+
+  const handleRoll = (max: number) => {
+    const result = rollDice(max);
+
+    setRollResult(result);
+    setIsRollResultModalVisible(true);
+  };
 
   return (
     <View className="h-14 w-14 items-center justify-center">
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
+      <TouchableOpacity onPress={() => setIsSelectDiceModalVisible(true)}>
         <Text testID="dice-button" style={{ fontFamily: 'dicefont', fontSize: 48, color: '#FFF' }}>
           {'\uF18F'}
         </Text>
       </TouchableOpacity>
 
       <GenericModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
+        visible={isSelectDiceModalVisible}
+        onClose={() => setIsSelectDiceModalVisible(false)}
         title="terminal"
         actions={
           <>
             <TouchableOpacity
-              className="mr-4 w-24 items-center justify-center border border-white px-4 py-2 shadow shadow-white"
-              onPress={() => setModalVisible(false)}>
+              className="w-24 items-center justify-center border border-white px-4 py-2 shadow shadow-white"
+              onPress={() => setIsSelectDiceModalVisible(false)}>
               <Text className="text-center text-base font-semibold tracking-widest text-white">
                 Cancel
               </Text>
@@ -38,93 +49,44 @@ const DiceRoller = () => {
             '\n > welcome, root \n > run probability_lattice.exe \n > loading randomisation models...'
           }
         </Text>
-        <Text className="font-bold text-white">{' > choose a randomiser:'}</Text>
+        <Text className="text-sm font-bold text-white">{' > choose a randomiser:'}</Text>
 
         <View className="mt-4 w-full flex-1 justify-center gap-2">
           <View className="mb-2 flex w-full flex-row justify-evenly gap-2">
-            <View className="items-center">
-              <TouchableOpacity className="h-16 w-16 items-center justify-center rounded border border-white bg-black/30 p-2">
-                <Image
-                  source={TargetIcon}
-                  style={{ width: 48, height: 52, tintColor: '#FFF' }}
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
-              <Text className="font-bold text-white">mark</Text>
-            </View>
-            <View className="items-center">
-              <TouchableOpacity className="m-1 h-16 w-16 items-center justify-center rounded border border-white bg-black/30 p-2">
-                <Image
-                  source={QuestionIcon}
-                  style={{ width: 48, height: 52, tintColor: '#FFF' }}
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
-              <Text className="font-bold text-white">random</Text>
-            </View>
-            <View className="items-center">
-              <TouchableOpacity className="m-1 h-16 w-16 items-center justify-center rounded border border-white bg-black/30 p-2">
-                <Text style={{ fontFamily: 'dicefont', fontSize: 48, color: '#FFF' }}>
-                  {'\uF118'}
-                </Text>
-              </TouchableOpacity>
-              <Text className="font-bold text-white">coin flip</Text>
-            </View>
+            <DiceIconButton label="mark" icon={TargetIcon} />
+            <DiceIconButton label="random" icon={QuestionIcon} />
+            <DiceIconButton label="coin flip" iconChar={'\uF118'} onPress={() => handleRoll(2)} />
           </View>
-
           <View className="mb-2 flex w-full flex-row justify-evenly gap-2">
-            <View className="items-center">
-              <TouchableOpacity className="m-1 h-16 w-16 items-center justify-center rounded border border-white bg-black/30 p-2">
-                <Text style={{ fontFamily: 'dicefont', fontSize: 48, color: '#FFF' }}>
-                  {'\uF130'}
-                </Text>
-              </TouchableOpacity>
-              <Text className="font-bold text-white">d4</Text>
-            </View>
-            <View className="items-center">
-              <TouchableOpacity className="m-1 h-16 w-16 items-center justify-center rounded border border-white bg-black/30 p-2">
-                <Text style={{ fontFamily: 'dicefont', fontSize: 48, color: '#FFF' }}>
-                  {'\uF136'}
-                </Text>
-              </TouchableOpacity>
-              <Text className="font-bold text-white">d6</Text>
-            </View>
-            <View className="items-center">
-              <TouchableOpacity className="m-1 h-16 w-16 items-center justify-center rounded border border-white bg-black/30 p-2">
-                <Text style={{ fontFamily: 'dicefont', fontSize: 48, color: '#FFF' }}>
-                  {'\uF13E'}
-                </Text>
-              </TouchableOpacity>
-              <Text className="font-bold text-white">d8</Text>
-            </View>
+            <DiceIconButton label="d4" iconChar={'\uF130'} onPress={() => handleRoll(4)} />
+            <DiceIconButton label="d6" iconChar={'\uF136'} onPress={() => handleRoll(6)} />
+            <DiceIconButton label="d8" iconChar={'\uF13E'} onPress={() => handleRoll(8)} />
           </View>
-
           <View className="flex w-full flex-row justify-evenly gap-2">
-            <View className="items-center">
-              <TouchableOpacity className="m-1 h-16 w-16 items-center justify-center rounded border border-white bg-black/30 p-2">
-                <Text style={{ fontFamily: 'dicefont', fontSize: 48, color: '#FFF' }}>
-                  {'\uF102'}
-                </Text>
-              </TouchableOpacity>
-              <Text className="font-bold text-white">d10</Text>
-            </View>
-            <View className="items-center">
-              <TouchableOpacity className="m-1 h-16 w-16 items-center justify-center rounded border border-white bg-black/30 p-2">
-                <Text style={{ fontFamily: 'dicefont', fontSize: 48, color: '#FFF' }}>
-                  {'\uF10E'}
-                </Text>
-              </TouchableOpacity>
-              <Text className="font-bold text-white">d12</Text>
-            </View>
-            <View className="items-center">
-              <TouchableOpacity className="m-1 h-16 w-16 items-center justify-center rounded border border-white bg-black/30 p-2">
-                <Text style={{ fontFamily: 'dicefont', fontSize: 48, color: '#FFF' }}>
-                  {'\uF125'}
-                </Text>
-              </TouchableOpacity>
-              <Text className="font-bold text-white">d20</Text>
-            </View>
+            <DiceIconButton label="d10" iconChar={'\uF102'} onPress={() => handleRoll(10)} />
+            <DiceIconButton label="d12" iconChar={'\uF10E'} onPress={() => handleRoll(12)} />
+            <DiceIconButton label="d20" iconChar={'\uF125'} onPress={() => handleRoll(20)} />
           </View>
+        </View>
+      </GenericModal>
+
+      <GenericModal
+        visible={isRollResultModalVisible}
+        onClose={() => setIsRollResultModalVisible(false)}
+        title={`probability_output`}
+        actions={
+          <>
+            <TouchableOpacity
+              className="w-24 items-center justify-center border border-white px-4 py-2 shadow shadow-white"
+              onPress={() => setIsRollResultModalVisible(false)}>
+              <Text className="text-center text-base font-semibold tracking-widest text-white">
+                Close
+              </Text>
+            </TouchableOpacity>
+          </>
+        }>
+        <View className="flex items-center justify-center py-8">
+          <Text className="text-4xl font-bold text-white">{rollResult}</Text>
         </View>
       </GenericModal>
     </View>

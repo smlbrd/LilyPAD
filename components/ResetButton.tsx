@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TouchableOpacity, View, Text, Pressable } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 import ResetIcon from '../assets/RESET_ICON.svg';
 import { useReset } from '../contexts/ResetContext';
 import GenericModal from './GenericModal';
@@ -22,23 +22,23 @@ const ResetButton = () => {
       <GenericModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
-        title="TERMINAL"
+        title="terminal"
         actions={
           <>
-            <Pressable
+            <TouchableOpacity
               className="mr-4 w-24 items-center justify-center border border-white px-4 py-2 shadow shadow-white"
               onPress={() => setModalVisible(false)}>
               <Text className="text-center text-base font-semibold tracking-widest text-white">
                 Cancel
               </Text>
-            </Pressable>
-            <Pressable
+            </TouchableOpacity>
+            <TouchableOpacity
               className="w-24 items-center justify-center border border-red-600 bg-red-600 px-4 py-2 shadow-md shadow-red-600"
               onPress={handleConfirm}>
               <Text className="text-center text-base font-semibold tracking-widest text-white">
                 Reset
               </Text>
-            </Pressable>
+            </TouchableOpacity>
           </>
         }>
         <Text

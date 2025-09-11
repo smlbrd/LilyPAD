@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import GenericCounter from './GenericCounter';
+import AgendaIcon from '../assets/NSG_AGENDA.svg';
 import { getAgendaColumns } from '../utils/utils';
 import { useReset } from '../contexts/ResetContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -57,7 +58,14 @@ const AgendaCounter = ({ maxAgendaPoints = 7, playerId }: AgendaCounterProps) =>
               />
             ))}
           </View>
-          <Text className="z-0 text-center text-4xl font-bold text-white">{points}</Text>
+          <View className="pointer-events-none absolute left-0 right-0 z-10 h-full flex-row items-center justify-center">
+            <AgendaIcon width={40} height={40} fill="#FFF" />
+            <View className="w-10">
+              <Text className="text-nowrap text-center text-4xl font-bold text-white">
+                {points}
+              </Text>
+            </View>
+          </View>
         </View>
       )}
     />

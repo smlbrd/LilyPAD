@@ -35,9 +35,7 @@ export default function PlayerArea({ playerId }: PlayerAreaProps) {
 
   return (
     <View className="mt-2 flex-1 items-start justify-start bg-black/20">
-      <View
-        style={{ minWidth: 40 }}
-        className="border-2 border-white bg-black px-4 py-2 shadow-sm shadow-white">
+      <View className="min-w-10 border-2 border-white bg-black px-4 py-2 shadow-sm shadow-white">
         <TouchableOpacity onPress={openModal} testID={`player-nametag-${playerId}`}>
           <Text style={{ fontFamily: 'monkirta' }} className="text-lg tracking-widest text-white">
             {playerName}
@@ -58,7 +56,7 @@ export default function PlayerArea({ playerId }: PlayerAreaProps) {
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         title="ADMIN_create_user"
-        modalClassName="w-1/3"
+        modalClassName="w-2/3"
         actions={
           <>
             <TouchableOpacity
@@ -82,7 +80,7 @@ export default function PlayerArea({ playerId }: PlayerAreaProps) {
           </>
         }>
         <View className="w-full">
-          <Text className="text-start text-white">{'> Enter username'}</Text>
+          <Text className="text-start text-white">{' > Enter username'}</Text>
         </View>
         <View className="w-full items-center">
           <TextInput

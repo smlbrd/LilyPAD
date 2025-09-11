@@ -65,9 +65,7 @@ const DiceRoller = () => {
           className="text-sm text-white"
           accessible={false}
           importantForAccessibility="no-hide-descendants">
-          {
-            '\n > welcome, root \n > run probability_lattice.exe \n > loading randomisation models...'
-          }
+          {' > run probability_lattice.exe \n > loading randomisation models...'}
         </Text>
         <Text className="text-sm font-bold text-white">{' > choose a randomiser:'}</Text>
 

@@ -45,9 +45,7 @@ const ResetButton = () => {
           className="text-sm text-white"
           accessible={false}
           importantForAccessibility="no-hide-descendants">
-          {
-            '\n > welcome, root \n > EXECUTE SYSTEM PURGE \n > loading... \n > running d4t4-b3gon3.exe'
-          }
+          {' > EXECUTE SYSTEM PURGE \n > loading... \n > running d4t4-b3gon3.exe'}
         </Text>
         <Text className="text-sm font-bold text-white">
           {' > this will reset all values to default \n > proceed?'}

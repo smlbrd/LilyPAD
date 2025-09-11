@@ -26,7 +26,7 @@ const GenericModal = ({
       </View>
       <View className={`border-2 border-white bg-black shadow shadow-white ${modalClassName}`}>
         <View className="p-2">{children}</View>
-        <View className="mb-4 flex-row items-center justify-evenly">{actions}</View>
+        <View className="my-4 flex-row items-center justify-evenly">{actions}</View>
       </View>
     </Pressable>
   </Modal>

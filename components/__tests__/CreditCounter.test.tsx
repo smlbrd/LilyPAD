@@ -1,62 +1,79 @@
-import { fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 import CreditCounter from '../CreditCounter';
 import { ResetProvider } from '../../contexts/ResetContext';
 import ResetButton from '../ResetButton';
 
 describe('CreditCounter', () => {
   it('renders the initial value', () => {
-    const { getByText } = render(<CreditCounter />);
+    const { getByText } = render(<CreditCounter playerId="User1" />);
+
     expect(getByText('5')).toBeTruthy();
   });
 
   it('increments the credit value', () => {
-    const { getByText } = render(<CreditCounter />);
-    const plus = getByText('+');
+    const { getByText } = render(<CreditCounter playerId="User1" />);
 
-    fireEvent.press(plus);
+    act(() => {
+      fireEvent.press(getByText('+'));
+    });
+
     expect(getByText('6')).toBeTruthy();
   });
 
   it('decrements the credit value', () => {
-    const { getByText } = render(<CreditCounter />);
-    const minus = getByText('-');
+    const { getByText } = render(<CreditCounter playerId="User1" />);
 
-    fireEvent.press(minus);
+    act(() => {
+      fireEvent.press(getByText('-'));
+    });
+
     expect(getByText('4')).toBeTruthy();
   });
 
   it('does not decrement below zero', () => {
-    const { getByText } = render(<CreditCounter />);
+    const { getByText } = render(<CreditCounter playerId="User1" />);
+
     expect(getByText('5')).toBeTruthy();
 
     const minus = getByText('-');
+
     for (let i = 0; i < 5; i++) {
-      fireEvent.press(minus);
+      act(() => {
+        fireEvent.press(minus);
+      });
     }
+
     expect(getByText('0')).toBeTruthy();
 
-    fireEvent.press(minus);
+    act(() => {
+      fireEvent.press(minus);
+    });
+
     expect(getByText('0')).toBeTruthy();
   });
 
-  it('resets clicks when reset is triggered', async () => {
-    const { findByText, getByTestId, getByText } = render(
+  it('resets clicks when reset is triggered', () => {
+    const { getByTestId, getByText } = render(
       <ResetProvider>
-        <CreditCounter />
+        <CreditCounter playerId="User1" />
         <ResetButton />
       </ResetProvider>
     );
     expect(getByText('5')).toBeTruthy();
 
-    const plus = getByText('+');
+    act(() => {
+      fireEvent.press(getByText('+'));
+    });
 
-    fireEvent.press(plus);
     expect(getByText('6')).toBeTruthy();
 
-    fireEvent.press(getByTestId('reset-button'));
+    act(() => {
+      fireEvent.press(getByTestId('reset-button'));
+    });
 
-    const confirmResetButton = await findByText('Reset');
-    fireEvent.press(confirmResetButton);
+    act(() => {
+      fireEvent.press(getByText('Reset'));
+    });
 
     expect(getByText('5')).toBeTruthy();
   });

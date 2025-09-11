@@ -1,4 +1,3 @@
-import { Image } from 'react-native';
 import { render, fireEvent } from '@testing-library/react-native';
 import DiceIconButton from '../DiceIconButton';
 
@@ -10,12 +9,12 @@ describe('DiceIconButton', () => {
     expect(getByText('\uF136')).toBeTruthy();
   });
 
-  it('renders label and icon (Image)', () => {
-    const iconMock = { uri: 'test.png' };
-    const { getByText, UNSAFE_getByType } = render(<DiceIconButton label="icon" icon={iconMock} />);
+  it('renders label and icon', () => {
+    const iconMock = { uri: 'test.svg' };
+    const { getByText, getByTestId } = render(<DiceIconButton label="icon" icon={iconMock} />);
 
     expect(getByText('icon')).toBeTruthy();
-    expect(UNSAFE_getByType(Image)).toBeTruthy();
+    expect(getByTestId('diceicon-visual')).toBeTruthy();
   });
 
   it('calls onPress when pressed', () => {

@@ -1,3 +1,4 @@
+import { act } from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import { ResetContext } from '../../contexts/ResetContext';
 import ResetButton from '../ResetButton';
@@ -7,7 +8,7 @@ describe('Reset Button', () => {
     const reset = jest.fn();
     const contextValue = { reset, resetCount: 0 };
 
-    const { findByText, getByTestId } = render(
+    const { getByText, getByTestId } = render(
       <ResetContext.Provider value={contextValue}>
         <ResetButton />
       </ResetContext.Provider>
@@ -15,8 +16,9 @@ describe('Reset Button', () => {
 
     fireEvent.press(getByTestId('reset-button'));
 
-    const confirmResetButton = await findByText('Reset');
-    fireEvent.press(confirmResetButton);
+    await act(async () => {
+      fireEvent.press(getByText('Reset'));
+    });
 
     expect(reset).toHaveBeenCalled();
   });

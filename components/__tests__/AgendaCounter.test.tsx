@@ -1,4 +1,5 @@
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { act } from 'react';
+import { fireEvent, render } from '@testing-library/react-native';
 import AgendaCounter from '../AgendaCounter';
 import { ResetProvider } from '../../contexts/ResetContext';
 import ResetButton from '../ResetButton';
@@ -13,9 +14,7 @@ describe('AgendaCounter', () => {
   it('increments the agenda value', () => {
     const { getByText } = render(<AgendaCounter playerId="User1" />);
 
-    act(() => {
-      fireEvent.press(getByText('+'));
-    });
+    fireEvent.press(getByText('+'));
 
     expect(getByText('1')).toBeTruthy();
   });
@@ -23,9 +22,7 @@ describe('AgendaCounter', () => {
   it('decrements the agenda value below zero', () => {
     const { getByText } = render(<AgendaCounter playerId="User1" />);
 
-    act(() => {
-      fireEvent.press(getByText('-'));
-    });
+    fireEvent.press(getByText('-'));
 
     expect(getByText('-1')).toBeTruthy();
   });
@@ -34,15 +31,13 @@ describe('AgendaCounter', () => {
     const { getByText } = render(<AgendaCounter playerId="User1" />);
 
     for (let i = 0; i < 10; i++) {
-      act(() => {
-        fireEvent.press(getByText('+'));
-      });
+      fireEvent.press(getByText('+'));
     }
 
     expect(getByText('7')).toBeTruthy();
   });
 
-  it('resets agenda points when reset is triggered', () => {
+  it('resets agenda points when reset is triggered', async () => {
     const { getByText, getByTestId } = render(
       <ResetProvider>
         <AgendaCounter playerId="User1" />
@@ -50,17 +45,13 @@ describe('AgendaCounter', () => {
       </ResetProvider>
     );
 
-    act(() => {
-      fireEvent.press(getByText('+'));
-    });
+    fireEvent.press(getByText('+'));
 
     expect(getByText('1')).toBeTruthy();
 
-    act(() => {
-      fireEvent.press(getByTestId('reset-button'));
-    });
+    fireEvent.press(getByTestId('reset-button'));
 
-    act(() => {
+    await act(async () => {
       fireEvent.press(getByText('Reset'));
     });
 

@@ -1,4 +1,5 @@
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { act } from 'react';
+import { fireEvent, render } from '@testing-library/react-native';
 import CreditCounter from '../CreditCounter';
 import { ResetProvider } from '../../contexts/ResetContext';
 import ResetButton from '../ResetButton';
@@ -13,9 +14,7 @@ describe('CreditCounter', () => {
   it('increments the credit value', () => {
     const { getByText } = render(<CreditCounter playerId="User1" />);
 
-    act(() => {
-      fireEvent.press(getByText('+'));
-    });
+    fireEvent.press(getByText('+'));
 
     expect(getByText('6')).toBeTruthy();
   });
@@ -23,9 +22,7 @@ describe('CreditCounter', () => {
   it('decrements the credit value', () => {
     const { getByText } = render(<CreditCounter playerId="User1" />);
 
-    act(() => {
-      fireEvent.press(getByText('-'));
-    });
+    fireEvent.press(getByText('-'));
 
     expect(getByText('4')).toBeTruthy();
   });
@@ -38,21 +35,17 @@ describe('CreditCounter', () => {
     const minus = getByText('-');
 
     for (let i = 0; i < 5; i++) {
-      act(() => {
-        fireEvent.press(minus);
-      });
+      fireEvent.press(minus);
     }
 
     expect(getByText('0')).toBeTruthy();
 
-    act(() => {
-      fireEvent.press(minus);
-    });
+    fireEvent.press(minus);
 
     expect(getByText('0')).toBeTruthy();
   });
 
-  it('resets clicks when reset is triggered', () => {
+  it('resets clicks when reset is triggered', async () => {
     const { getByTestId, getByText } = render(
       <ResetProvider>
         <CreditCounter playerId="User1" />
@@ -61,19 +54,15 @@ describe('CreditCounter', () => {
     );
     expect(getByText('5')).toBeTruthy();
 
-    act(() => {
-      fireEvent.press(getByText('+'));
-    });
+    fireEvent.press(getByText('+'));
 
     expect(getByText('6')).toBeTruthy();
 
-    act(() => {
+    await act(async () => {
       fireEvent.press(getByTestId('reset-button'));
     });
 
-    act(() => {
-      fireEvent.press(getByText('Reset'));
-    });
+    fireEvent.press(getByText('Reset'));
 
     expect(getByText('5')).toBeTruthy();
   });

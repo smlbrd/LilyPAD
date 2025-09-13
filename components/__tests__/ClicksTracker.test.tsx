@@ -1,3 +1,4 @@
+import { act } from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import ClicksTracker from '../ClicksTracker';
 import { ResetProvider } from '../../contexts/ResetContext';
@@ -63,21 +64,21 @@ describe('ClicksTracker click icon functionality', () => {
   });
 
   it('resets clicks when reset is triggered', async () => {
-    const { findByText, getByText, getByTestId, getAllByTestId } = render(
+    const { getByText, getByTestId, getAllByTestId } = render(
       <ResetProvider>
         <ClicksTracker />
         <ResetButton />
       </ResetProvider>
     );
-    const plus = getByText('+');
 
-    fireEvent.press(plus);
+    fireEvent.press(getByText('+'));
     expect(getAllByTestId('click-svg-default').length).toBe(4);
 
     fireEvent.press(getByTestId('reset-button'));
 
-    const confirmResetButton = await findByText('Reset');
-    fireEvent.press(confirmResetButton);
+    await act(async () => {
+      fireEvent.press(getByText('Reset'));
+    });
 
     expect(getAllByTestId('click-svg-default').length).toBe(3);
   });

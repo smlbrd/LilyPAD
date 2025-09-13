@@ -4,20 +4,23 @@ import Counter from '../GenericCounter';
 describe('GenericCounter', () => {
   it('renders initial value', () => {
     const { getByText } = render(<Counter value={5} />);
+
     expect(getByText('5')).toBeTruthy();
   });
 
   it('increments the credit count', () => {
     const { getByText } = render(<Counter />);
-    const plusButton = getByText('+');
-    fireEvent.press(plusButton);
+
+    fireEvent.press(getByText('+'));
+
     expect(getByText('1')).toBeTruthy();
   });
 
   it('decrements the credit count', () => {
     const { getByText } = render(<Counter />);
-    const minusButton = getByText('-');
-    fireEvent.press(minusButton);
+
+    fireEvent.press(getByText('-'));
+
     expect(getByText('-1')).toBeTruthy();
   });
 });

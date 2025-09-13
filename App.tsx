@@ -11,6 +11,7 @@ export default function App() {
   useEffect(() => {
     Font.loadAsync({
       dicefont: require('./public/fonts/dicefont.ttf'),
+      monkirta: require('./public/fonts/monkirta-pursuit-nc.ttf'),
     }).then(() => setFontsLoaded(true));
   }, []);
 

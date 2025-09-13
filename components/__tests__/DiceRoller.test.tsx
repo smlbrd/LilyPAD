@@ -14,7 +14,6 @@ jest.mock('../GenericModal', () => ({
 }));
 
 jest.mock('../../assets/TARGET_ICON.png', () => 1);
-
 jest.mock('../../assets/QUESTION_ICON.png', () => 2);
 
 jest.mock('../../utils/utils', () => ({

@@ -1,20 +1,43 @@
 import { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import GenericCounter from './GenericCounter';
+import AgendaIcon from '../assets/NSG_AGENDA.svg';
 import { getAgendaColumns } from '../utils/utils';
 import { useReset } from '../contexts/ResetContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface AgendaCounterProps {
   maxAgendaPoints?: number;
+  playerId: string;
 }
 
-const AgendaCounter = ({ maxAgendaPoints = 7 }: AgendaCounterProps) => {
+const STORAGE_KEY = (id: string) => `agendas_${id}`;
+
+const loadAgendaPoints = async (playerId: string) => {
+  const value = await AsyncStorage.getItem(STORAGE_KEY(playerId));
+  return value !== null ? Number(value) : 0;
+};
+
+const saveAgendaPoints = async (playerId: string, points: number) => {
+  await AsyncStorage.setItem(STORAGE_KEY(playerId), String(points));
+};
+
+const AgendaCounter = ({ maxAgendaPoints = 7, playerId }: AgendaCounterProps) => {
   const [currentAgendaPoints, setCurrentAgendaPoints] = useState(0);
   const { resetCount } = useReset();
 
   useEffect(() => {
+    loadAgendaPoints(playerId).then(setCurrentAgendaPoints);
+  }, [playerId]);
+
+  useEffect(() => {
     setCurrentAgendaPoints(0);
-  }, [resetCount]);
+    saveAgendaPoints(playerId, 0);
+  }, [resetCount, playerId]);
+
+  useEffect(() => {
+    saveAgendaPoints(playerId, currentAgendaPoints);
+  }, [currentAgendaPoints, playerId]);
 
   return (
     <GenericCounter
@@ -35,7 +58,14 @@ const AgendaCounter = ({ maxAgendaPoints = 7 }: AgendaCounterProps) => {
               />
             ))}
           </View>
-          <Text className="z-0 text-center text-4xl font-bold text-white">{points}</Text>
+          <View className="pointer-events-none absolute left-0 right-0 z-10 h-full flex-row items-center justify-center">
+            <AgendaIcon width={40} height={40} fill="#FFF" />
+            <View className="w-10">
+              <Text className="text-nowrap text-center text-4xl font-bold text-white">
+                {points}
+              </Text>
+            </View>
+          </View>
         </View>
       )}
     />

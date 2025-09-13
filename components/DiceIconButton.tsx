@@ -17,6 +17,7 @@ const DiceIconButton = ({ label, onPress, icon, iconChar, style, testID }: DiceI
       onPress={onPress}>
       {icon ? (
         <Image
+          testID="diceicon-visual"
           source={icon}
           style={{ width: 48, height: 52, tintColor: '#FFF' }}
           resizeMode="contain"

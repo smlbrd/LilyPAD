@@ -65,9 +65,7 @@ const DiceRoller = () => {
           className="text-sm text-white"
           accessible={false}
           importantForAccessibility="no-hide-descendants">
-          {
-            '\n > welcome, root \n > run probability_lattice.exe \n > loading randomisation models...'
-          }
+          {' > run probability_lattice.exe \n > loading randomisation models...'}
         </Text>
         <Text className="text-sm font-bold text-white">{' > choose a randomiser:'}</Text>
 
@@ -199,7 +197,7 @@ const DiceRoller = () => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              className="ml-2 w-24 items-center justify-center border border-white bg-white px-4 py-2 shadow shadow-white"
+              className="w-24 items-center justify-center border border-white bg-white px-4 py-2 shadow shadow-white"
               onPress={handleCustomRoll}
               disabled={
                 customMax.trim() === '' || isNaN(Number(customMax)) || Number(customMax) < 1

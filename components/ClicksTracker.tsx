@@ -55,7 +55,8 @@ const ClicksTracker = () => {
       <TouchableHighlight
         onPress={handleDecrement}
         disabled={!canDecrement}
-        className={`absolute left-0 top-0 z-10 h-full ${isCondensed ? 'w-1/2' : 'w-1/6'}`}
+        className={'absolute left-0 top-0 z-10 h-full'}
+        style={{ width: `${isCondensed ? '50%' : '20%'}` }}
         underlayColor="rgba(255, 255, 255, 0.1)">
         <View className="z-10 h-full flex-1 items-start justify-center pl-5">
           <Text className="text-center text-3xl font-bold text-white/50">-</Text>
@@ -63,14 +64,14 @@ const ClicksTracker = () => {
       </TouchableHighlight>
 
       {isCondensed ? (
-        <View className="flex w-4/6 flex-row items-center justify-center">
+        <View className="flex flex-row items-center justify-center" style={{ width: '66%' }}>
           <ClickDefault testID="click-svg-condensed" width={70} height={70} fill="#FFF" />
           <View className="w-10">
             <Text className="text-4xl font-bold text-white">{clicksCount}</Text>
           </View>
         </View>
       ) : (
-        <View className="flex w-4/6 flex-row items-center justify-evenly">
+        <View className="flex flex-row items-center justify-evenly" style={{ width: '66%' }}>
           {createClicks.map((clicked, index) => (
             <TouchableHighlight
               key={index}
@@ -90,7 +91,8 @@ const ClicksTracker = () => {
       <TouchableHighlight
         onPress={handleIncrement}
         disabled={!canIncrement}
-        className={`absolute right-0 top-0 z-10 h-full ${isCondensed ? 'w-1/2' : 'w-1/6'} ${!canIncrement ? 'opacity-50' : ''}`}
+        className={`absolute right-0 top-0 z-10 h-full ${!canIncrement ? 'opacity-50' : ''}`}
+        style={{ width: `${isCondensed ? '50%' : '20%'}` }}
         underlayColor="rgba(255, 255, 255, 0.1)">
         <View className="z-10 h-full flex-1 items-end justify-center pr-5">
           <Text className="text-center text-3xl font-bold text-white/50">+</Text>

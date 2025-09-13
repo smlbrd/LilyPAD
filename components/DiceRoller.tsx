@@ -69,8 +69,22 @@ const DiceRoller = () => {
         </Text>
         <Text className="text-sm font-bold text-white">{' > choose a randomiser:'}</Text>
 
-        <View className="mt-4 w-full flex-1 justify-center">
-          <View className="mb-2 flex w-full flex-row justify-evenly gap-1">
+        <View
+          style={{
+            flexDirection: 'column',
+            width: '100%',
+            justifyContent: 'center',
+            marginTop: 4,
+            gap: 4,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              width: '100%',
+              justifyContent: 'space-evenly',
+              marginBottom: 4,
+              gap: 4,
+            }}>
             <DiceIconButton
               label="mark"
               icon={TargetIcon}
@@ -90,7 +104,15 @@ const DiceRoller = () => {
               testID="dice-icon-coinflip"
             />
           </View>
-          <View className="mb-2 flex w-full flex-row justify-evenly gap-1">
+
+          <View
+            style={{
+              flexDirection: 'row',
+              width: '100%',
+              justifyContent: 'space-evenly',
+              marginBottom: 4,
+              gap: 4,
+            }}>
             <DiceIconButton
               label="d4"
               iconChar={'\uF130'}
@@ -110,7 +132,15 @@ const DiceRoller = () => {
               testID="dice-icon-d8"
             />
           </View>
-          <View className="flex w-full flex-row justify-evenly gap-1">
+
+          <View
+            style={{
+              flexDirection: 'row',
+              width: '100%',
+              justifyContent: 'space-evenly',
+              marginBottom: 4,
+              gap: 4,
+            }}>
             <DiceIconButton
               label="d10"
               iconChar={'\uF102'}
@@ -137,7 +167,7 @@ const DiceRoller = () => {
         visible={isRollResultModalVisible}
         onClose={() => setIsRollResultModalVisible(false)}
         title={`probability_output`}
-        modalClassName="w-2/3"
+        modalWidth="66%"
         actions={
           <>
             <TouchableOpacity
@@ -183,7 +213,7 @@ const DiceRoller = () => {
           setCustomMax('');
         }}
         title="probability_output"
-        modalClassName="w-2/3"
+        modalWidth="66%"
         actions={
           <>
             <TouchableOpacity
@@ -208,7 +238,7 @@ const DiceRoller = () => {
             </TouchableOpacity>
           </>
         }>
-        <Text className="mb-2 text-center text-white">Generate number between 1 and</Text>
+        <Text className="mb-2 text-center text-white">Generate number between 1 and...</Text>
         <View className="w-full items-center">
           <TextInput
             className="mb-2 mt-2 w-32 border border-white bg-zinc-800 px-4 py-2 text-xl text-white"

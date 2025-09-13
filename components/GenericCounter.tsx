@@ -36,12 +36,15 @@ const Counter = ({
       {renderDisplay ? (
         renderDisplay(currentValue)
       ) : (
-        <Text className="text-center text-4xl font-bold text-white">{currentValue}</Text>
+        <Text className="text-center text-4xl font-bold text-white" numberOfLines={1}>
+          {currentValue}
+        </Text>
       )}
 
       <TouchableHighlight
         onPress={handleDecrement}
-        className="absolute left-0 top-0 z-10 h-full w-1/2"
+        className="absolute left-0 top-0 z-10 h-full"
+        style={{ width: '50%' }}
         underlayColor="rgba(255, 255, 255, 0.1)">
         <View className="z-10 h-full flex-1 items-start justify-center pl-5">
           <Text className="text-center text-3xl font-bold text-white/50">-</Text>
@@ -50,7 +53,8 @@ const Counter = ({
 
       <TouchableHighlight
         onPress={handleIncrement}
-        className="absolute right-0 top-0 z-10 h-full w-1/2"
+        className="absolute right-0 top-0 z-10 h-full"
+        style={{ width: '50%' }}
         underlayColor="rgba(255, 255, 255, 0.1)">
         <View className="z-10 h-full flex-1 items-end justify-center pr-5">
           <Text className="text-center text-3xl font-bold text-white/50">+</Text>

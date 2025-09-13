@@ -46,8 +46,12 @@ const CreditCounter = ({ defaultCredits = 5, playerId }: CreditCounterProps) => 
       renderDisplay={(credits) => (
         <View className="pointer-events-none absolute left-0 right-0 z-10 h-full flex-row items-center justify-center">
           <CreditIcon width={40} height={40} fill="#FFF" />
-          <View className="w-10">
-            <Text className="text-nowrap text-center text-4xl font-bold text-white">{credits}</Text>
+          <View className="w-15">
+            <Text
+              className="text-nowrap text-center text-4xl font-bold text-white"
+              numberOfLines={1}>
+              {credits}
+            </Text>
           </View>
         </View>
       )}

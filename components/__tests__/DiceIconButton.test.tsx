@@ -32,7 +32,7 @@ describe('DiceIconButton', () => {
     const iconChar = getByText('F');
 
     expect(iconChar.props.style).toEqual(
-      expect.objectContaining({ fontFamily: 'dicefont', fontSize: 48, color: '#FFF' })
+      expect.objectContaining({ fontFamily: 'dicefont', fontSize: 40, color: '#FFF' })
     );
   });
 });

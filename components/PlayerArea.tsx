@@ -56,7 +56,7 @@ export default function PlayerArea({ playerId }: PlayerAreaProps) {
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         title="ADMIN_create_user"
-        modalClassName="w-2/3"
+        modalWidth="66%"
         actions={
           <>
             <TouchableOpacity
@@ -88,7 +88,8 @@ export default function PlayerArea({ playerId }: PlayerAreaProps) {
             onChangeText={setInputValue}
             placeholder="Enter name"
             maxLength={20}
-            className="my-4 w-2/3 border border-white bg-zinc-800 px-4 py-2 text-base text-white"
+            className="my-4 border border-white bg-zinc-800 px-4 py-2 text-base text-white"
+            style={{ width: '66%' }}
             testID={`player-name-input-${playerId}`}
           />
         </View>

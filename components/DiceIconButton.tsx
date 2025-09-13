@@ -19,11 +19,11 @@ const DiceIconButton = ({ label, onPress, icon, iconChar, style, testID }: DiceI
         <Image
           testID="diceicon-visual"
           source={icon}
-          style={{ width: 48, height: 52, tintColor: '#FFF' }}
+          style={{ width: 44, height: 46, tintColor: '#FFF' }}
           resizeMode="contain"
         />
       ) : (
-        <Text style={{ fontFamily: 'dicefont', fontSize: 48, color: '#FFF' }}>{iconChar}</Text>
+        <Text style={{ fontFamily: 'dicefont', fontSize: 40, color: '#FFF' }}>{iconChar}</Text>
       )}
     </TouchableOpacity>
     <Text className="font-bold text-white">{label}</Text>

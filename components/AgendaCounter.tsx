@@ -46,7 +46,7 @@ const AgendaCounter = ({ maxAgendaPoints = 7, playerId }: AgendaCounterProps) =>
       onChange={setCurrentAgendaPoints}
       renderDisplay={(points) => (
         <View className="flex-1 items-center justify-center">
-          <View className="absolute -bottom-4 z-0 w-4/5 flex-row items-end">
+          <View className="absolute -bottom-4 z-0 flex-row items-end" style={{ width: '80%' }}>
             {getAgendaColumns(maxAgendaPoints, points).map(({ key, height }) => (
               <View
                 key={key}

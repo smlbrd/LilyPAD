@@ -36,7 +36,7 @@ describe('DiceRoller', () => {
 
     fireEvent.press(getByTestId('dice-button'));
 
-    expect(getByText('> choose a randomiser:')).toBeTruthy();
+    expect(getByText('choose a randomiser:')).toBeTruthy();
   });
 
   it('shows roll result modal after rolling a dice', async () => {
@@ -58,7 +58,7 @@ describe('DiceRoller', () => {
     fireEvent.press(getByTestId('dice-button'));
     fireEvent.press(getByText('Cancel'));
 
-    expect(queryByText('> choose a randomiser:')).toBeNull();
+    expect(queryByText('choose a randomiser:')).toBeNull();
   });
 
   it('closes randomiser result modal on Close', async () => {
@@ -74,7 +74,9 @@ describe('DiceRoller', () => {
 
     fireEvent.press(getByText('Close'));
 
-    expect(queryByText('2')).toBeNull();
+    await waitFor(() => {
+      expect(queryByText('2')).toBeNull();
+    });
   });
 
   it('shows coin flip result modal after coinflip', async () => {

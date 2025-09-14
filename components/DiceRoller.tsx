@@ -40,7 +40,12 @@ const DiceRoller = () => {
 
   return (
     <View className="h-14 w-14 items-center justify-center">
-      <TouchableOpacity onPress={() => setIsSelectDiceModalVisible(true)}>
+      <TouchableOpacity
+        onPress={() => setIsSelectDiceModalVisible(true)}
+        accessibilityRole="button"
+        accessibilityLabel="Randomiser menu"
+        accessibilityHint="Opens a list of random generators"
+        accessible={true}>
         <Text testID="dice-button" style={{ fontFamily: 'dicefont', fontSize: 48, color: '#FFF' }}>
           {'\uF18F'}
         </Text>
@@ -67,7 +72,7 @@ const DiceRoller = () => {
           importantForAccessibility="no-hide-descendants">
           {' > run probability_lattice.exe \n > loading randomisation models...'}
         </Text>
-        <Text className="text-sm font-bold text-white">{' > choose a randomiser:'}</Text>
+        <Text className="text-sm font-bold text-white">{'choose a randomiser:'}</Text>
 
         <View
           style={{
@@ -90,18 +95,24 @@ const DiceRoller = () => {
               icon={TargetIcon}
               testID="dice-icon-mark"
               onPress={handleMarkRoll}
+              randomiserA11yLabel="Choose a mark"
+              randomiserA11yHint="Randomly selects HQ, R&D or archives"
             />
             <DiceIconButton
               label="custom"
               icon={QuestionIcon}
               testID="dice-icon-custom"
               onPress={() => setIsCustomRollModalVisible(true)}
+              randomiserA11yLabel="Custom Dice Roll"
+              randomiserA11yHint="Randomly generates number between 1 and input value"
             />
             <DiceIconButton
               label="coinflip"
               iconChar={'\uF118'}
               onPress={() => handleDiceRoll(2)}
               testID="dice-icon-coinflip"
+              randomiserA11yLabel="Flip a coin"
+              randomiserA11yHint="Randomly selects Heads or Tails"
             />
           </View>
 
@@ -118,18 +129,24 @@ const DiceRoller = () => {
               iconChar={'\uF130'}
               onPress={() => handleDiceRoll(4)}
               testID="dice-icon-d4"
+              randomiserA11yLabel="Roll d4"
+              randomiserA11yHint="Randomly selects number 1-4"
             />
             <DiceIconButton
               label="d6"
               iconChar={'\uF136'}
               onPress={() => handleDiceRoll(6)}
               testID="dice-icon-d6"
+              randomiserA11yLabel="Roll d6"
+              randomiserA11yHint="Randomly selects number 1-6"
             />
             <DiceIconButton
               label="d8"
               iconChar={'\uF13E'}
               onPress={() => handleDiceRoll(8)}
               testID="dice-icon-d8"
+              randomiserA11yLabel="Roll d8"
+              randomiserA11yHint="Randomly selects number 1-8"
             />
           </View>
 
@@ -146,18 +163,24 @@ const DiceRoller = () => {
               iconChar={'\uF102'}
               onPress={() => handleDiceRoll(10)}
               testID="dice-icon-d10"
+              randomiserA11yLabel="Roll d10"
+              randomiserA11yHint="Randomly selects number 1-10"
             />
             <DiceIconButton
               label="d12"
               iconChar={'\uF10E'}
               onPress={() => handleDiceRoll(12)}
               testID="dice-icon-d12"
+              randomiserA11yLabel="Roll d12"
+              randomiserA11yHint="Randomly selects number 1-12"
             />
             <DiceIconButton
               label="d20"
               iconChar={'\uF125'}
               onPress={() => handleDiceRoll(20)}
               testID="dice-icon-d20"
+              randomiserA11yLabel="Roll d20"
+              randomiserA11yHint="Randomly selects number 1-20"
             />
           </View>
         </View>
@@ -172,8 +195,12 @@ const DiceRoller = () => {
           <>
             <TouchableOpacity
               className="w-24 items-center justify-center border border-white px-4 py-2 shadow shadow-white"
-              onPress={() => setIsRollResultModalVisible(false)}>
-              <Text className="text-center text-base font-semibold tracking-widest text-white">
+              onPress={() => setIsRollResultModalVisible(false)}
+              accessibilityLabel="Go back"
+              accessibilityHint="Return to previous menu">
+              <Text
+                className="text-center text-base font-semibold tracking-widest text-white"
+                accessible={false}>
                 Close
               </Text>
             </TouchableOpacity>
@@ -212,7 +239,7 @@ const DiceRoller = () => {
           setIsCustomRollModalVisible(false);
           setCustomMax('');
         }}
-        title="probability_output"
+        title="result"
         modalWidth="66%"
         actions={
           <>

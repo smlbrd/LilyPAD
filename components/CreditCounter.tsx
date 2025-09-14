@@ -43,13 +43,21 @@ const CreditCounter = ({ defaultCredits = 5, playerId }: CreditCounterProps) => 
       value={credits}
       min={0}
       onChange={setCredits}
+      decrementA11yLabel="Remove one credit"
+      incrementA11yLabel="Add one credit"
+      decrementA11yHint="Decreases credits to minimum of zero"
+      incrementA11yHint="Increases credits"
       renderDisplay={(credits) => (
         <View className="pointer-events-none absolute left-0 right-0 z-10 h-full flex-row items-center justify-center">
           <CreditIcon width={40} height={40} fill="#FFF" />
           <View className="w-15">
             <Text
               className="text-nowrap text-center text-4xl font-bold text-white"
-              numberOfLines={1}>
+              numberOfLines={1}
+              accessibilityRole="text"
+              accessibilityLiveRegion="polite"
+              accessible={true}
+              accessibilityLabel={`Credits: ${credits}`}>
               {credits}
             </Text>
           </View>

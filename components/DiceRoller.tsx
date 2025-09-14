@@ -43,8 +43,8 @@ const DiceRoller = () => {
       <TouchableOpacity
         onPress={() => setIsSelectDiceModalVisible(true)}
         accessibilityRole="button"
-        accessibilityLabel="Randomiser menu"
-        accessibilityHint="Opens a list of random generators"
+        accessibilityLabel="Open randomiser menu"
+        accessibilityHint="Opens a list of random result generators"
         accessible={true}>
         <Text testID="dice-button" style={{ fontFamily: 'dicefont', fontSize: 48, color: '#FFF' }}>
           {'\uF18F'}
@@ -54,7 +54,7 @@ const DiceRoller = () => {
       <GenericModal
         visible={isSelectDiceModalVisible}
         onClose={() => setIsSelectDiceModalVisible(false)}
-        title="terminal"
+        title="randomiser menu"
         actions={
           <>
             <TouchableOpacity
@@ -72,7 +72,9 @@ const DiceRoller = () => {
           importantForAccessibility="no-hide-descendants">
           {' > run probability_lattice.exe \n > loading randomisation models...'}
         </Text>
-        <Text className="text-sm font-bold text-white">{'choose a randomiser:'}</Text>
+        <Text className="my-4 text-center text-sm font-bold text-white">
+          {'choose a randomiser:'}
+        </Text>
 
         <View
           style={{
@@ -96,7 +98,7 @@ const DiceRoller = () => {
               testID="dice-icon-mark"
               onPress={handleMarkRoll}
               randomiserA11yLabel="Choose a mark"
-              randomiserA11yHint="Randomly selects HQ, R&D or archives"
+              randomiserA11yHint="Randomly selects a mark from HQ, R&D or archives"
             />
             <DiceIconButton
               label="custom"
@@ -104,7 +106,7 @@ const DiceRoller = () => {
               testID="dice-icon-custom"
               onPress={() => setIsCustomRollModalVisible(true)}
               randomiserA11yLabel="Custom Dice Roll"
-              randomiserA11yHint="Randomly generates number between 1 and input value"
+              randomiserA11yHint="Randomly generates number between 1 and a chosen input value"
             />
             <DiceIconButton
               label="coinflip"
@@ -189,7 +191,7 @@ const DiceRoller = () => {
       <GenericModal
         visible={isRollResultModalVisible}
         onClose={() => setIsRollResultModalVisible(false)}
-        title={`probability_output`}
+        title="result"
         modalWidth="66%"
         actions={
           <>
@@ -207,10 +209,10 @@ const DiceRoller = () => {
           </>
         }>
         <View className="flex items-center justify-center p-2">
-          <Text className="text-lg text-white">{`Your ${
+          <Text className="mt-2 text-lg text-white">{`your ${
             typeof rollResult === 'number'
               ? 'roll is'
-              : rollResult === 'Heads' || rollResult === 'Tails'
+              : rollResult === 'heads' || rollResult === 'tails'
                 ? 'coin landed on'
                 : 'mark is'
           }`}</Text>
@@ -265,14 +267,14 @@ const DiceRoller = () => {
             </TouchableOpacity>
           </>
         }>
-        <Text className="mb-2 text-center text-white">Generate number between 1 and...</Text>
+        <Text className="my-2 text-center text-white">generate number between 1 and:</Text>
         <View className="w-full items-center">
           <TextInput
-            className="mb-2 mt-2 w-32 border border-white bg-zinc-800 px-4 py-2 text-xl text-white"
+            className="mb-2 mt-4 w-32 border border-white bg-zinc-800 px-4 py-2 text-xl text-white"
             keyboardType="numeric"
             value={customMax}
             onChangeText={setCustomMax}
-            placeholder="100"
+            placeholder="e.g. 100"
             placeholderTextColor="#888"
             maxLength={10}
             testID="dice-input-custom"

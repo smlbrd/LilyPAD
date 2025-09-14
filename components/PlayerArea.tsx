@@ -80,7 +80,7 @@ export default function PlayerArea({ playerId }: PlayerAreaProps) {
           </>
         }>
         <View className="w-full">
-          <Text className="text-start text-white">{' > Enter username'}</Text>
+          <Text className="text-start text-white">{'Enter username'}</Text>
         </View>
         <View className="w-full items-center">
           <TextInput

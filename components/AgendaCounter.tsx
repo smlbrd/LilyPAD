@@ -44,6 +44,10 @@ const AgendaCounter = ({ maxAgendaPoints = 7, playerId }: AgendaCounterProps) =>
       max={maxAgendaPoints}
       value={currentAgendaPoints}
       onChange={setCurrentAgendaPoints}
+      decrementA11yLabel="Remove one agenda point"
+      incrementA11yLabel="Add one agenda point"
+      decrementA11yHint="Decreases agenda points by 1"
+      incrementA11yHint={`Increases agenda points to maximum of ${maxAgendaPoints}`}
       renderDisplay={(points) => (
         <View className="flex-1 items-center justify-center">
           <View className="absolute -bottom-4 z-0 flex-row items-end" style={{ width: '80%' }}>
@@ -61,7 +65,13 @@ const AgendaCounter = ({ maxAgendaPoints = 7, playerId }: AgendaCounterProps) =>
           <View className="pointer-events-none absolute left-0 right-0 z-10 h-full flex-row items-center justify-center">
             <AgendaIcon width={40} height={40} fill="#FFF" />
             <View className="w-10">
-              <Text className="text-nowrap text-center text-4xl font-bold text-white">
+              <Text
+                className="text-nowrap text-center text-4xl font-bold text-white"
+                numberOfLines={1}
+                accessibilityRole="text"
+                accessibilityLiveRegion="polite"
+                accessible={true}
+                accessibilityLabel={`Agenda points: ${points}`}>
                 {points}
               </Text>
             </View>

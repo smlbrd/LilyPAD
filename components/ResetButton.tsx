@@ -15,7 +15,11 @@ const ResetButton = () => {
 
   return (
     <View className="h-14 w-14 items-center justify-center">
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
+      <TouchableOpacity
+        onPress={() => setModalVisible(true)}
+        accessibilityRole="button"
+        accessibilityLabel="Reset game"
+        accessible={true}>
         <ResetIcon testID="reset-button" width={50} height={50} fill="#FFF" />
       </TouchableOpacity>
 
@@ -48,7 +52,7 @@ const ResetButton = () => {
           {' > EXECUTE SYSTEM PURGE \n > loading... \n > running d4t4-b3gon3.exe'}
         </Text>
         <Text className="text-sm font-bold text-white">
-          {' > this will reset all values to default \n > proceed?'}
+          {'this will reset all values to default \n do you want to proceed?'}
         </Text>
       </GenericModal>
     </View>

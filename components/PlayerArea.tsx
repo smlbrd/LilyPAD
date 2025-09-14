@@ -55,7 +55,7 @@ export default function PlayerArea({ playerId }: PlayerAreaProps) {
       <GenericModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
-        title="ADMIN_create_user"
+        title="edit user"
         modalWidth="66%"
         actions={
           <>
@@ -80,13 +80,13 @@ export default function PlayerArea({ playerId }: PlayerAreaProps) {
           </>
         }>
         <View className="w-full">
-          <Text className="text-start text-white">{'Enter username'}</Text>
+          <Text className="my-2 text-center font-bold text-white">{'enter username'}</Text>
         </View>
         <View className="w-full items-center">
           <TextInput
             value={inputValue}
             onChangeText={setInputValue}
-            placeholder="Enter name"
+            placeholder="e.g. Phoenix"
             maxLength={20}
             className="my-4 border border-white bg-zinc-800 px-4 py-2 text-base text-white"
             style={{ width: '66%' }}

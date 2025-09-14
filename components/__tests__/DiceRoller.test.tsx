@@ -47,7 +47,7 @@ describe('DiceRoller', () => {
     fireEvent.press(getByTestId('dice-icon-d6'));
 
     await waitFor(() => {
-      expect(getByText('Your roll is')).toBeTruthy();
+      expect(getByText('your roll is')).toBeTruthy();
       expect(getByText('5')).toBeTruthy();
     });
   });
@@ -80,15 +80,15 @@ describe('DiceRoller', () => {
   });
 
   it('shows coin flip result modal after coinflip', async () => {
-    (rollDice as jest.Mock).mockReturnValue('Heads');
+    (rollDice as jest.Mock).mockReturnValue('heads');
     const { getByTestId, getByText } = render(<DiceRoller />);
 
     fireEvent.press(getByTestId('dice-button'));
     fireEvent.press(getByTestId('dice-icon-coinflip'));
 
     await waitFor(() => {
-      expect(getByText('Your coin landed on')).toBeTruthy();
-      expect(getByText('Heads')).toBeTruthy();
+      expect(getByText('your coin landed on')).toBeTruthy();
+      expect(getByText('heads')).toBeTruthy();
     });
   });
 
@@ -100,7 +100,7 @@ describe('DiceRoller', () => {
     fireEvent.press(getByTestId('dice-icon-mark'));
 
     await waitFor(() => {
-      expect(getByText('Your mark is')).toBeTruthy();
+      expect(getByText('your mark is')).toBeTruthy();
       expect(getByText('Archives')).toBeTruthy();
     });
 

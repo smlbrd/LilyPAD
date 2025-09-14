@@ -26,7 +26,7 @@ const ResetButton = () => {
       <GenericModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
-        title="terminal"
+        title="reset menu"
         actions={
           <>
             <TouchableOpacity
@@ -51,8 +51,8 @@ const ResetButton = () => {
           importantForAccessibility="no-hide-descendants">
           {' > EXECUTE SYSTEM PURGE \n > loading... \n > running d4t4-b3gon3.exe'}
         </Text>
-        <Text className="text-sm font-bold text-white">
-          {'this will reset all values to default \n do you want to proceed?'}
+        <Text className="mt-2 text-center text-sm font-bold text-white">
+          {'\n this will reset all values to default \n proceed?'}
         </Text>
       </GenericModal>
     </View>
